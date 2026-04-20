@@ -1,0 +1,11 @@
+[build]
+  # The folder inside your repo where index.html lives
+  publish = "Amrit Sparsh Code"
+  # No build command needed — pure static HTML/CSS/JS
+  command = ""
+
+# --- SPA fallback: send all unknown paths to index.html ---
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
