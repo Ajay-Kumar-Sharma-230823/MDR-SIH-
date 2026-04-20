@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ward &amp; Bed Live Status Monitor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/_sdk/element_sdk.js"></script>
+    <link rel="stylesheet" href="../css/smart-ward.css">
+    <style>
+        @view-transition {
+            navigation: auto;
+        }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+</head>
+
+<body class="w-full h-full bg-slate-100">
+    <div id="app-root" class="w-full h-full flex flex-col"><!-- Header -->
+        <header class="w-full border-b border-slate-300 bg-white shadow-sm">
+            <div class="max-w-full px-6 py-3 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-sky-600 flex items-center justify-center shadow-md">
+                        <div class="w-6 h-6 relative">
+                            <div class="absolute inset-0.5 bg-white rounded-sm"></div>
+                            <div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1.5 bg-sky-600 rounded-sm">
+                            </div>
+                            <div class="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-1.5 bg-sky-600 rounded-sm">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h1 id="hospital-name" class="text-slate-900 font-bold text-lg tracking-tight">Apollo Medical
+                            Center</h1>
+                        <p id="system-subtitle" class="text-slate-600 text-xs">Real-time ward monitoring &amp; bed
+                            status intelligence</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-6 text-xs">
+                    <div class="flex items-center gap-2">
+                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div><span
+                            class="text-slate-600 font-medium">System Online</span>
+                    </div>
+                    <div class="hidden md:flex items-center gap-2 text-slate-500">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg><span id="current-time">14:32 IST</span>
+                    </div>
+                </div>
+            </div>
+        </header><!-- Main content -->
+        <main class="flex-1 flex min-h-0"><!-- Ward Selection Screen -->
+            <div id="ward-selection-screen" class="flex-1 overflow-auto bg-gradient-to-br from-slate-50 to-slate-100">
+                <div class="max-w-7xl mx-auto px-6 py-8"><!-- Dashboard header -->
+                    <div class="mb-8">
+                        <h2 class="text-slate-900 font-bold text-2xl mb-2">Ward Management Dashboard</h2>
+                        <p class="text-slate-600 text-sm">Select a ward to view real-time bed status and patient
+                            information</p>
+                    </div><!-- Quick stats -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                        <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-500 text-xs font-medium">Total Beds</p>
+                                    <p class="text-slate-900 text-2xl font-bold mt-1">84</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-full bg-sky-100 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-sky-600" fill="none" stroke="currentColor"
+                                        viewbox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-500 text-xs font-medium">Occupied</p>
+                                    <p class="text-slate-900 text-2xl font-bold mt-1">57</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor"
+                                        viewbox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-500 text-xs font-medium">Available</p>
+                                    <p class="text-slate-900 text-2xl font-bold mt-1">27</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-full bg-violet-100 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-violet-600" fill="none" stroke="currentColor"
+                                        viewbox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-slate-500 text-xs font-medium">MDR Patients</p>
+                                    <p class="text-slate-900 text-2xl font-bold mt-1">12</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-full bg-violet-100 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-violet-600" fill="none" stroke="currentColor"
+                                        viewbox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- Ward cards grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><!-- ICU Ward A --> <button
+                            type="button"
+                            class="ward-card focus-ring text-left bg-white rounded-xl p-6 border-2 border-slate-200 shadow-md"
+                            onclick="selectWard('icu-a')">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-slate-900 font-bold text-lg">ICU Ward A</h3>
+                                    <p class="text-slate-500 text-xs mt-1">Medical Intensive Care</p>
+                                </div>
+                                <div class="w-10 h-10 rounded-lg bg-rose-100 flex items-center justify-center"><span
+                                        class="text-rose-600 font-bold text-sm">A</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-3 mb-4">
+                                <div class="bg-slate-50 rounded-lg p-2 border border-slate-200">
+                                    <p class="text-slate-500 text-[10px] font-medium">Total</p>
+                                    <p class="text-slate-900 text-lg font-bold">20</p>
+                                </div>
+                                <div class="bg-emerald-50 rounded-lg p-2 border border-emerald-200">
+                                    <p class="text-emerald-600 text-[10px] font-medium">Occupied</p>
+                                    <p class="text-emerald-900 text-lg font-bold">12</p>
+                                </div>
+                                <div class="bg-sky-50 rounded-lg p-2 border border-sky-200">
+                                    <p class="text-sky-600 text-[10px] font-medium">Empty</p>
+                                    <p class="text-sky-900 text-lg font-bold">8</p>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="flex items-center justify-between text-xs mb-1"><span
+                                        class="text-slate-600">Risk Level</span> <span
+                                        class="text-rose-600 font-semibold">High</span>
+                                </div>
+                                <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-rose-500 to-rose-600 rounded-full"
+                                        style="width: 72%;"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 mt-4 pt-4 border-t border-slate-200">
+                                <div class="flex items-center gap-1 text-xs">
+                                    <div class="w-2 h-2 rounded-full bg-rose-500"></div><span class="text-slate-600">4
+                                        Critical</span>
+                                </div>
+                                <div class="flex items-center gap-1 text-xs">
+                                    <div class="w-2 h-2 rounded-full bg-violet-500"></div><span class="text-slate-600">1
+                                        MDR</span>
+                                </div>
+                            </div>
+                        </button> <!-- ICU Ward B --> <button type="button"
+                            class="ward-card focus-ring text-left bg-white rounded-xl p-6 border-2 border-slate-200 shadow-md"
+                            onclick="selectWard('icu-b')">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-slate-900 font-bold text-lg">ICU Ward B</h3>
+                                    <p class="text-slate-500 text-xs mt-1">Surgical Intensive Care</p>
+                                </div>
+                                <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center"><span
+                                        class="text-amber-600 font-bold text-sm">B</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-3 mb-4">
+                                <div class="bg-slate-50 rounded-lg p-2 border border-slate-200">
+                                    <p class="text-slate-500 text-[10px] font-medium">Total</p>
+                                    <p class="text-slate-900 text-lg font-bold">16</p>
+                                </div>
+                                <div class="bg-emerald-50 rounded-lg p-2 border border-emerald-200">
+                                    <p class="text-emerald-600 text-[10px] font-medium">Occupied</p>
+                                    <p class="text-emerald-900 text-lg font-bold">14</p>
+                                </div>
+                                <div class="bg-sky-50 rounded-lg p-2 border border-sky-200">
+                                    <p class="text-sky-600 text-[10px] font-medium">Empty</p>
+                                    <p class="text-sky-900 text-lg font-bold">2</p>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="flex items-center justify-between text-xs mb-1"><span
+                                        class="text-slate-600">Risk Level</span> <span
+                                        class="text-amber-600 font-semibold">Medium</span>
+                                </div>
+                                <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"
+                                        style="width: 48%;"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 mt-4 pt-4 border-t border-slate-200">
+                                <div class="flex items-center gap-1 text-xs">
+                                    <div class="w-2 h-2 rounded-full bg-emerald-500"></div><span
+                                        class="text-slate-600">8 Stable</span>
+                                </div>
+                                <div class="flex items-center gap-1 text-xs">
+                                    <div class="w-2 h-2 rounded-full bg-amber-500"></div><span class="text-slate-600">6
+                                        Medium</span>
+                                </div>
+                            </div>
+                        </button> <!-- General Ward --> <button type="button"
+                            class="ward-card focus-ring text-left bg-white rounded-xl p-6 border-2 border-slate-200 shadow-md"
+                            onclick="selectWard('general')">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-slate-900 font-bold text-lg">General Ward</h3>
+                                    <p class="text-slate-500 text-xs mt-1">General Medicine</p>
+                                </div>
+                                <div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center"><span
+                                        class="text-emerald-600 font-bold text-sm">G</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-3 mb-4">
+                                <div class="bg-slate-50 rounded-lg p-2 border border-slate-200">
+                                    <p class="text-slate-500 text-[10px] font-medium">Total</p>
+                                    <p class="text-slate-900 text-lg font-bold">24</p>
+                                </div>
+                                <div class="bg-emerald-50 rounded-lg p-2 border border-emerald-200">
+                                    <p class="text-emerald-600 text-[10px] font-medium">Occupied</p>
+                                    <p class="text-emerald-900 text-lg font-bold">18</p>
+                                </div>
+                                <div class="bg-sky-50 rounded-lg p-2 border border-sky-200">
+                                    <p class="text-sky-600 text-[10px] font-medium">Empty</p>
+                                    <p class="text-sky-900 text-lg font-bold">6</p>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="flex items-center justify-between text-xs mb-1"><span
+                                        class="text-slate-600">Risk Level</span> <span
+                                        class="text-emerald-600 font-semibold">Low</span>
+                                </div>
+                                <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full"
+                                        style="width: 32%;"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 mt-4 pt-4 border-t border-slate-200">
+                                <div class="flex items-center gap-1 text-xs">
+                                    <div class="w-2 h-2 rounded-full bg-emerald-500"></div><span
+                                        class="text-slate-600">14 Stable</span>
+                                </div>
+                                <div class="flex items-center gap-1 text-xs">
+                                    <div class="w-2 h-2 rounded-full bg-amber-500"></div><span class="text-slate-600">4
+                                        Medium</span>
+                                </div>
+                            </div>
+                        </button> <!-- MDR Isolation Ward --> <button type="button"
+                            class="ward-card focus-ring text-left bg-white rounded-xl p-6 border-2 border-slate-200 shadow-md"
+                            onclick="selectWard('mdr-isolation')">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-slate-900 font-bold text-lg">MDR Isolation Ward</h3>
+                                    <p class="text-slate-500 text-xs mt-1">Multi-Drug Resistant</p>
+                                </div>
+                                <div class="w-10 h-10 rounded-lg bg-violet-100 flex items-center justify-center"><span
+                                        class="text-violet-600 font-bold text-sm">M</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-3 mb-4">
+                                <div class="bg-slate-50 rounded-lg p-2 border border-slate-200">
+                                    <p class="text-slate-500 text-[10px] font-medium">Total</p>
+                                    <p class="text-slate-900 text-lg font-bold">12</p>
+                                </div>
+                                <div class="bg-emerald-50 rounded-lg p-2 border border-emerald-200">
+                                    <p class="text-emerald-600 text-[10px] font-medium">Occupied</p>
+                                    <p class="text-emerald-900 text-lg font-bold">11</p>
+                                </div>
+                                <div class="bg-sky-50 rounded-lg p-2 border border-sky-200">
+                                    <p class="text-sky-600 text-[10px] font-medium">Empty</p>
+                                    <p class="text-sky-900 text-lg font-bold">1</p>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="flex items-center justify-between text-xs mb-1"><span
+                                        class="text-slate-600">Risk Level</span> <span
+                                        class="text-violet-600 font-semibold">Critical</span>
+                                </div>
+                                <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-violet-500 to-violet-600 rounded-full"
+                                        style="width: 92%;"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 mt-4 pt-4 border-t border-slate-200">
+                                <div class="flex items-center gap-1 text-xs">
+                                    <div class="w-2 h-2 rounded-full bg-violet-500"></div><span
+                                        class="text-slate-600">11 MDR Confirmed</span>
+                                </div>
+                            </div>
+                        </button> <!-- Surgical Ward --> <button type="button"
+                            class="ward-card focus-ring text-left bg-white rounded-xl p-6 border-2 border-slate-200 shadow-md"
+                            onclick="selectWard('surgical')">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-slate-900 font-bold text-lg">Surgical Ward</h3>
+                                    <p class="text-slate-500 text-xs mt-1">Post-Operative Care</p>
+                                </div>
+                                <div class="w-10 h-10 rounded-lg bg-sky-100 flex items-center justify-center"><span
+                                        class="text-sky-600 font-bold text-sm">S</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-3 mb-4">
+                                <div class="bg-slate-50 rounded-lg p-2 border border-slate-200">
+                                    <p class="text-slate-500 text-[10px] font-medium">Total</p>
+                                    <p class="text-slate-900 text-lg font-bold">12</p>
+                                </div>
+                                <div class="bg-emerald-50 rounded-lg p-2 border border-emerald-200">
+                                    <p class="text-emerald-600 text-[10px] font-medium">Occupied</p>
+                                    <p class="text-emerald-900 text-lg font-bold">2</p>
+                                </div>
+                                <div class="bg-sky-50 rounded-lg p-2 border border-sky-200">
+                                    <p class="text-sky-600 text-[10px] font-medium">Empty</p>
+                                    <p class="text-sky-900 text-lg font-bold">10</p>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="flex items-center justify-between text-xs mb-1"><span
+                                        class="text-slate-600">Risk Level</span> <span
+                                        class="text-emerald-600 font-semibold">Low</span>
+                                </div>
+                                <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full"
+                                        style="width: 25%;"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 mt-4 pt-4 border-t border-slate-200">
+                                <div class="flex items-center gap-1 text-xs">
+                                    <div class="w-2 h-2 rounded-full bg-emerald-500"></div><span
+                                        class="text-slate-600">2 Stable</span>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div><!-- Ward Detail Screen -->
+            <div id="ward-detail-screen" class="flex-1 overflow-auto hidden">
+                <div class="ward-floor min-h-full p-8"><!-- Ceiling lights -->
+                    <div class="ceiling-light" style="top: 10%; left: 20%;"></div>
+                    <div class="ceiling-light" style="top: 10%; left: 50%;"></div>
+                    <div class="ceiling-light" style="top: 10%; left: 80%;"></div>
+                    <div class="ceiling-light" style="top: 50%; left: 20%;"></div>
+                    <div class="ceiling-light" style="top: 50%; left: 50%;"></div>
+                    <div class="ceiling-light" style="top: 50%; left: 80%;"></div><!-- Ward header -->
+                    <div
+                        class="relative z-10 mb-6 bg-white/90 backdrop-blur-sm border border-slate-200 rounded-xl px-6 py-4 shadow-lg max-w-7xl mx-auto">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4"><button type="button"
+                                    class="focus-ring text-slate-600 hover:text-slate-900 transition"
+                                    onclick="backToWardSelection()">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                    </svg></button>
+                                <div>
+                                    <h2 id="ward-detail-name" class="text-slate-900 font-bold text-xl">ICU Ward A</h2>
+                                    <p id="ward-detail-info" class="text-slate-600 text-sm mt-1">20 beds • 12 occupied •
+                                        8 available</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-xs">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-slate-300"></div><span
+                                        class="text-slate-600">Empty</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500"></div><span
+                                        class="text-slate-600">Stable</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-amber-500"></div><span
+                                        class="text-slate-600">Medium</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-rose-500"></div><span
+                                        class="text-slate-600">Critical</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-violet-500"></div><span
+                                        class="text-slate-600">MDR</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- Beds grid -->
+                    <div id="beds-container" class="relative z-10 max-w-7xl mx-auto">
+                        <!-- Beds will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div><!-- Patient info panel -->
+            <aside id="info-panel"
+                class="w-96 bg-white border-l border-slate-300 shadow-2xl hidden flex-col info-panel-enter">
+                <div class="border-b border-slate-200 px-6 py-4 flex items-center justify-between">
+                    <h3 class="text-slate-900 font-bold text-base">Patient Details</h3><button type="button"
+                        class="focus-ring text-slate-400 hover:text-slate-600 transition" onclick="closePanel()">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg></button>
+                </div>
+                <div class="flex-1 overflow-auto px-6 py-4 space-y-4"><!-- Patient header -->
+                    <div class="bg-gradient-to-br from-sky-50 to-blue-50 rounded-xl p-4 border border-sky-200">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <p class="text-[10px] text-slate-500 uppercase tracking-wide font-semibold mb-1"><span
+                                        id="detail-bed-number">BED A01</span></p>
+                                <h4 id="detail-patient-name" class="text-slate-900 font-bold text-lg">Rohan Sharma</h4>
+                                <p id="detail-patient-meta" class="text-sm text-slate-600 mt-1">46 years • Male</p>
+                            </div>
+                            <div id="detail-status-badge"
+                                class="px-3 py-1.5 rounded-full text-xs font-bold bg-rose-100 text-rose-700 border-2 border-rose-300">
+                                CRITICAL
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div>
+                                <p class="text-slate-500 text-[10px]">ABHA ID</p>
+                                <p id="detail-abha" class="text-slate-900 font-semibold mt-0.5">9087 1245 3321</p>
+                            </div>
+                            <div>
+                                <p class="text-slate-500 text-[10px]">Admission</p>
+                                <p id="detail-admission" class="text-slate-900 font-semibold mt-0.5">12 Feb 2025</p>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <p class="text-slate-500 text-[10px]">Attending Doctor</p>
+                            <p id="detail-doctor" class="text-slate-900 font-semibold mt-0.5">Dr. Mehta</p>
+                        </div>
+                    </div><!-- AI Risk Score -->
+                    <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <h5 class="text-slate-700 font-semibold text-sm">AI Risk Assessment</h5><span
+                                id="detail-risk-percent" class="text-2xl font-bold text-rose-600">88%</span>
+                        </div>
+                        <div class="h-3 bg-slate-100 rounded-full overflow-hidden mb-2">
+                            <div id="detail-risk-bar"
+                                class="h-full bg-rose-500 rounded-full transition-all duration-500" style="width: 88%;">
+                            </div>
+                        </div>
+                        <p id="detail-risk-label" class="text-xs text-slate-600">High risk of complications - Immediate
+                            monitoring required</p>
+                    </div><!-- MDR Status -->
+                    <div id="detail-mdr-section" class="bg-violet-50 rounded-xl p-4 border border-violet-200 hidden">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-8 h-8 rounded-full bg-violet-500 flex items-center justify-center"><span
+                                    class="text-white font-bold">⚠</span>
+                            </div>
+                            <h5 class="text-violet-900 font-bold text-sm">MDR Confirmed</h5>
+                        </div>
+                        <p class="text-xs text-violet-700">Multi-drug resistant organism detected. Strict isolation
+                            protocols in effect.</p>
+                    </div><!-- Vitals -->
+                    <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+                        <div class="flex items-center justify-between mb-3">
+                            <h5 class="text-slate-700 font-semibold text-sm">Vital Signs</h5><span
+                                class="text-[10px] text-slate-500">Updated 5 min ago</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-slate-50 rounded-lg p-2.5 border border-slate-200">
+                                <p class="text-[10px] text-slate-500 mb-1">Blood Pressure</p>
+                                <p id="detail-bp" class="text-sm font-bold text-slate-900">88/56 mmHg</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-lg p-2.5 border border-slate-200">
+                                <p class="text-[10px] text-slate-500 mb-1">Heart Rate</p>
+                                <p id="detail-hr" class="text-sm font-bold text-slate-900">118 bpm</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-lg p-2.5 border border-slate-200">
+                                <p class="text-[10px] text-slate-500 mb-1">SpO₂</p>
+                                <p id="detail-spo2" class="text-sm font-bold text-slate-900">88%</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-lg p-2.5 border border-slate-200">
+                                <p class="text-[10px] text-slate-500 mb-1">Temperature</p>
+                                <p id="detail-temp" class="text-sm font-bold text-slate-900">38.9°C</p>
+                            </div>
+                        </div>
+                    </div><!-- Action buttons -->
+                    <div class="space-y-2"><button type="button"
+                            class="focus-ring w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 rounded-lg transition shadow-md">
+                            Alert Doctor </button> <button type="button"
+                            class="focus-ring w-full bg-white hover:bg-slate-50 text-slate-700 font-semibold py-3 rounded-lg border-2 border-slate-300 transition">
+                            Transfer Patient </button> <button type="button"
+                            class="focus-ring w-full bg-white hover:bg-slate-50 text-slate-700 font-semibold py-3 rounded-lg border-2 border-slate-300 transition">
+                            Isolation Protocol </button>
+                    </div>
+                </div>
+                <div class="border-t border-slate-200 px-6 py-3 bg-slate-50">
+                    <div class="flex items-center justify-between text-xs text-slate-500"><span>Last updated: 2 min
+                            ago</span>
+                        <div class="flex items-center gap-1">
+                            <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div><span>Live</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+    <script src="../js/smart-ward.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+# Python virtual environments
+venv/
+myenv/
+env/
+.venv/
+*.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Database files (keep .bak too)
+*.db
+*.db-shm
+*.db-wal
+*.db.bak
+*.sqlite
+*.sqlite3
+
+# ML model binaries (large files - optional to include)
+# *.pkl
+# *.joblib
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Node / npm (if any)
+node_modules/
+dist/
+build/
+
+# Logs
+*.log
+
+# Uploads (user-generated content)
+Amrit Sparsh Code/backend/uploads/
+
+# Byte-compiled / optimized / DLL files
+*.spec

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MDR Self-Screening Checklist - Hospital-Grade Assessment Tool">
+    <title>MDR Self-Screening Checklist</title>
+    <link rel="stylesheet" href="../css/mdr-screening.css">
+</head>
+
+<body>
+    <button class="lang-toggle" id="langToggle">EN</button>
+
+    <header>
+        <h1 id="mainTitle">MDR Self-Screening Checklist</h1>
+        <p class="subtitle" id="mainSubtitle">Hospital-Grade Assessment Tool for Multi-Drug Resistant Organism Detection
+        </p>
+    </header>
+
+    <div class="container">
+        <div class="questions-container">
+            <div class="disclaimer" id="disclaimer">
+                ℹ️ This is a screening aid, not a diagnosis. Always consult clinical guidelines and medical
+                professionals.
+            </div>
+            <!-- Questions will be inserted here -->
+        </div>
+
+        <div class="sticky-panel">
+            <div class="summary-panel">
+                <div class="summary-label" id="summaryLabel">Assessment Summary</div>
+                <div class="score-display" id="scoreDisplay">0</div>
+                <div class="score-max">Out of 100</div>
+                <div class="risk-badge low" id="riskBadge">Low Risk</div>
+                <div class="advice-panel low" id="advicePanel">
+                    <div class="advice-title" id="adviceTitle">✓ Continue Routine Monitoring</div>
+                    <ul class="advice-list" id="adviceList">
+                        <li>Follow standard infection control measures</li>
+                        <li>Maintain routine hygiene protocols</li>
+                        <li>Document screening results</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="evaluateBtn">🔍 Evaluate</button>
+                <button class="btn btn-secondary" id="downloadBtn">⬇️ Download Report</button>
+                <button class="btn btn-secondary" id="resetBtn">🔄 Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/mdr-screening.js"></script>
+</body>
+
+</html>

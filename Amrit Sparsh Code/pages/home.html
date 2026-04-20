@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Amrit Sparsh - AI MDR Pathogen Tracing</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="MDR pathogen tracking, AI outbreak prediction, hospital infection control, antimicrobial resistance"
+        name="keywords">
+    <meta
+        content="Real-time MDR exposure detection, AI outbreak prediction, seamless EHR & lab integration to stop hospital-acquired resistant infections before they spread."
+        name="description">
+
+    <!-- Favicon -->
+    <link href="../img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="../css/style.css" rel="stylesheet">
+    <!-- Auth Check -->
+    <script src="../js/auth-check.js"></script>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Hero Banner CSS -->
+    <link href="../css/hero-banner.css" rel="stylesheet">
+    <link href="../css/navbar.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Topbar Start -->
+    <div class="container-fluid p-0 wow fadeIn" data-wow-delay="0.1s" style="background-color: #eff5ff;">
+        <div class="row gx-0 d-none d-lg-flex">
+            <div class="col-lg-7 px-5 text-start">
+                <div class="h-100 d-inline-flex align-items-center py-3 me-4">
+                    <small class="fa fa-map-marker-alt text-primary me-2"></small>
+                    <small class="text-secondary">Indore , M.P.</small>
+                </div>
+                <div class="h-100 d-inline-flex align-items-center py-3">
+                    <small class="far fa-clock text-primary me-2"></small>
+                    <small class="text-secondary">24*7 Infection Surveillance</small>
+                </div>
+            </div>
+            <div class="col-lg-5 px-5 text-end">
+                <div class="h-100 d-inline-flex align-items-center py-3 me-4">
+                    <small class="fa fa-phone-alt text-primary me-2"></small>
+                    <small class="text-secondary">+91 7000819978 , +91 7703816153</small>
+                </div>
+                <div class="h-100 d-inline-flex align-items-center">
+                    <a class="btn btn-sm-square rounded-circle bg-primary text-white me-1"
+                        href="https://youtu.be/W9DRAt3mJeY?si=PujQT2zhaI-e5pCo" target="_blank"><i
+                            class="fab fa-youtube"></i></a>
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-0" href="https://instagram.com"
+                        target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <nav id="navbar" class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn"
+        data-wow-delay="0.1s" style="border-bottom: 8px solid #0d6efd;">
+        <div class="container-fluid px-4 px-lg-5">
+            <!-- Logo and Brand Start -->
+            <a href="home.html" class="navbar-brand d-flex align-items-center">
+                <!-- Amrit Sparsh Logo -->
+                <img src="../img/amrit_sparsh_logo.png" style="height: 50px; width: auto; margin-right: 10px;"
+                    alt="Amrit Sparsh Logo">
+
+                <!-- Brand Name -->
+                <h1 class="m-0" style="font-size: 2rem; font-weight: 700; font-family: 'Inter', sans-serif;">
+                    <span style="color: #0d6efd;">Amrit</span> <span style="color: #0d6efd;">Sparsh</span>
+                </h1>
+            </a>
+            <!-- Logo and Brand End -->
+
+            <!-- Toggle Button for Mobile View -->
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto p-4 p-lg-0 align-items-center">
+                    <a href="home.html" class="nav-item nav-link active text-primary fw-bold"
+                        style="font-size: 0.9rem; letter-spacing: 0.5px;">HOME</a>
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle text-dark fw-bold" data-bs-toggle="dropdown"
+                            style="font-size: 0.9rem; letter-spacing: 0.5px;">PAGES</a>
+                        <div class="dropdown-menu rounded-0 rounded-bottom m-0">
+                            <a href="patient-intake.html" class="dropdown-item">Patient Clinical Insights</a>
+                            <a href="patient-status-panel.html" class="dropdown-item">Patient Status Panel</a>
+                            <a href="patient-TraceNet.html" class="dropdown-item">MDR TraceNet</a>
+                            <a href="lab-report-submission.html" class="dropdown-item">LabSync</a>
+                            <a href="smart-ward.html" class="dropdown-item">Patient Bed Status View</a>
+                            <a href="MDR Screening UI.html" class="dropdown-item">MDR Screening UI</a>
+                            <a href="AI-chatbot.html" class="dropdown-item">AI CHATBOT</a>
+                            <a href="newsfeed.html" class="dropdown-item">MDR Case Newsfeed</a>
+                            <a href="guidence.html" class="dropdown-item">MDR Care & Safety Protocol Assistant</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item d-flex align-items-center ms-3">
+                        <a href="#" class="nav-link position-relative" style="color: #1E2A38;">
+                            <i class="fas fa-bell" style="font-size: 1.2rem;"></i>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"
+                                style="width: 8px; height: 8px; margin-top: 10px; margin-left: -5px;">
+                                <span class="visually-hidden">New alerts</span>
+                            </span>
+                        </a>
+                        <div id="notification-container" style="position: relative;"></div>
+                    </div>
+
+                    <div class="nav-item dropdown ms-3">
+                        <a href="#" class="nav-link dropdown-toggle text-dark fw-bold d-flex align-items-center"
+                            data-bs-toggle="dropdown"
+                            style="font-size: 0.9rem; letter-spacing: 0.5px; text-decoration: none;">
+
+                            <span class="me-2 wave-animation" style="font-size: 1.4rem;">👋</span>
+
+                            <!-- dynamic greeting text -->
+                            <div class="d-flex align-items-center greeting-container">
+                                <span id="greeting-light" class="text-uppercase greeting-light">HEY,</span>
+                                <span id="greeting-bold" class="text-uppercase greeting-bold">DR. ANURAG</span>
+                            </div>
+
+
+                        </a>
+
+                        <div class="dropdown-menu rounded-0 rounded-bottom m-0">
+                            <a href="my-profile.html" class="dropdown-item">My Profile</a>
+                            <a href="setting.html" class="dropdown-item">Settings</a>
+                            <a href="../index.html" class="dropdown-item">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+
+    <!-- Header Start -->
+    <div class="container-fluid header bg-primary p-0 mb-5">
+        <div class="row g-0 align-items-center flex-column-reverse flex-lg-row">
+
+            <!-- Left Section: Text Content -->
+            <div class="col-lg-6 p-4 wow fadeIn" data-wow-delay="0.1s">
+                <h1 class="display-6 text-white mb-4">Amrit Sparsh — AI-powered Digital MDR Pathogen Tracing & Screening
+                    System.</h1>
+                <div class="row g-4">
+                    <div class="col-sm-4">
+                        <div class="border-start border-light ps-4">
+                            <h2 class="text-white mb-1">Real-time MDR Coverage</h2>
+                            <p class="text-light mb-0">Ward-level pathogen mapping & exposure chains</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="border-start border-light ps-4">
+                            <h2 class="text-white mb-1">Prevention Impact</h2>
+                            <p class="text-light mb-0">Helps prevent ICU-level MDR escalation</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="border-start border-light ps-4">
+                            <h2 class="text-white mb-1">Integrated Resolutions</h2>
+                            <p class="text-light mb-0">EHR / LIMS / ABHA integrated alerts & containment workflow</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Section: Image Carousel -->
+            <!-- Right Section: Image Carousel -->
+            <div class="col-lg-6 wow fadeIn d-flex justify-content-center align-items-center" data-wow-delay="0.5s"
+                style="margin-top: 0; display: flex; align-items: center; justify-content: center; height: 100%;">
+                <div class="owl-carousel header-carousel" style="width: 100%;">
+
+                    <!-- Slide 1 -->
+                    <div class="owl-carousel-item" style="text-align: center;">
+                        <img class="img-fluid" src="../img/why_choose_amrit_sparsh_landscape.png"
+                            alt="Why Choose Amrit Sparsh - AI-Powered MDR Pathogen Tracing"
+                            style="display: block; margin: 20px auto 0 auto; width: 100%; height: 280px; object-fit: contain; border-radius: 10px;">
+
+                        <h5 style="color: white; font-size: 30px; margin-top: 15px; margin-bottom: 30px;">Why Choose
+                            Amrit Sparsh</h5>
+                    </div>
+
+
+
+                    <!-- Slide 2 -->
+                    <div class="owl-carousel-item" style="text-align: center;">
+                        <img class="img-fluid" src="../img/ai_outbreak_prediction_vibrant.png"
+                            alt="AI Outbreak Prediction"
+                            style="display: block; margin: 20px auto 0 auto; width: 100%; height: 280px; object-fit: contain; border-radius: 10px;">
+
+                        <h5 style="color: white; font-size: 30px; margin-top: 15px; margin-bottom: 30px;">AI Outbreak
+                            Prediction</h5>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="owl-carousel-item" style="text-align: center;">
+                        <img class="img-fluid" src="../img/ward%20level%20mdr%20traking%20.png"
+                            alt="Hospital Ward Coverage"
+                            style="display: block; margin: 20px auto 0 auto; width: auto; height: 220px; object-fit: contain; border-radius: 10px;">
+
+                        <h5 style="color: white; font-size: 30px; margin-top: 15px; margin-bottom: 30px;">Ward-Level MDR
+                            Tracking</h5>
+                    </div>
+
+
+                </div> <!-- End of owl-carousel -->
+            </div>
+        </div> <!-- End of row -->
+    </div> <!-- End of container -->
+    <!-- Header End -->
+
+
+    <!-- About Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+
+                    <!-- Partner Logos Section -->
+                    <!-- LOGO SECTION: Clean White Background, No Box -->
+                    <div class="container text-center py-5">
+
+                        <!-- Top 2 Logos -->
+                        <div class="d-flex justify-content-center align-items-center flex-wrap mb-5" style="gap: 80px;">
+                            <!-- Logo 1 -->
+                            <img src="../img/smart_hospital_vision.png" alt="AI Analysing MDR Bacteria in Hospital Lab"
+                                style="height: 200px; width: auto; object-fit: contain;"
+                                class="img-fluid rounded shadow bg-white p-4">
+
+                            <!-- Logo 2 -->
+                            <img src="../img/patient_tracking_network.png" alt="Ward-Level Patient Movement Tracking"
+                                style="height: 200px; width: auto; object-fit: contain;"
+                                class="img-fluid rounded shadow bg-white p-4">
+                        </div>
+
+                        <!-- Bottom Centered Logo -->
+                        <div class="d-flex justify-content-center">
+                            <img src="../img/infection_control_ai.png" alt="MDR Infection Network & AI Analysis"
+                                style="height: 220px; width: auto; object-fit: contain;"
+                                class="img-fluid rounded shadow bg-white p-4">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                    <div class="d-inline-block border rounded-pill py-3 px-5 mt-n5 mb-4"
+                        style="background: linear-gradient(90deg, #00b09b 0%, #96c93d 100%); border: none !important; color: #ffffff; font-weight: 700; font-size: 1.2rem; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0, 176, 155, 0.4);">
+                        About Amrit Sparsh
+                    </div>
+                    <h1 class="mb-4"
+                        style="color: #0f172a; font-weight: 800; font-size: 2.5rem; letter-spacing: -0.5px; line-height: 1.2;">
+                        The End of Blind Spots in <span class="text-primary">Infection Control</span>.
+                    </h1>
+                    <p class="mb-4" style="color: #475569; font-size: 1.1rem; line-height: 1.8;">
+                        Traditional contact tracing is slow; bacteria are fast. <strong>Amrit Sparsh</strong> closes the
+                        gap. We don't just collect data; we turn your hospital into a smart facility that <span
+                            style="color: #2563eb; font-weight: 600;">"sees"</span> infection risks in real-time.
+                    </p>
+                    <p class="mb-5" style="color: #475569; font-size: 1.05rem; line-height: 1.7;">
+                        Powered by advanced intelligence, Amrit Sparsh tracks the complex web of patient movements and
+                        MDR carriers automatically. No more manual logs, no more delayed responses. We give your doctors
+                        and administrators the one thing they need most: <strong>Time</strong>. Time to isolate, time to
+                        contain, and time to save lives.
+                    </p>
+
+                    <div class="d-flex flex-column gap-3 mb-5">
+                        <div class="d-flex align-items-start">
+                            <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center flex-shrink-0 mt-1"
+                                style="width: 24px; height: 24px; background-color: #eff6ff !important;">
+                                <i class="fas fa-check text-primary" style="font-size: 14px;"></i>
+                            </div>
+                            <p class="ms-3 mb-0" style="color: #334155; font-size: 1.05rem;">Seamlessly maps patient
+                                movement to pinpoint infection hotspots.</p>
+                        </div>
+                        <div class="d-flex align-items-start">
+                            <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center flex-shrink-0 mt-1"
+                                style="width: 24px; height: 24px; background-color: #eff6ff !important;">
+                                <i class="fas fa-check text-primary" style="font-size: 14px;"></i>
+                            </div>
+                            <p class="ms-3 mb-0" style="color: #334155; font-size: 1.05rem;">Automatically detects who
+                                has been exposed to whom, instantly.</p>
+                        </div>
+                        <div class="d-flex align-items-start">
+                            <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center flex-shrink-0 mt-1"
+                                style="width: 24px; height: 24px; background-color: #eff6ff !important;">
+                                <i class="fas fa-check text-primary" style="font-size: 14px;"></i>
+                            </div>
+                            <p class="ms-3 mb-0" style="color: #334155; font-size: 1.05rem;">Uses predictive AI to
+                                identify high-risk zones before they become danger zones.</p>
+                        </div>
+                        <div class="d-flex align-items-start">
+                            <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center flex-shrink-0 mt-1"
+                                style="width: 24px; height: 24px; background-color: #eff6ff !important;">
+                                <i class="fas fa-check text-primary" style="font-size: 14px;"></i>
+                            </div>
+                            <p class="ms-3 mb-0" style="color: #334155; font-size: 1.05rem;"><strong>Zero-Friction
+                                    Integration:</strong> Works effortlessly with your existing ABHA, EHR, and LIMS
+                                systems.</p>
+                        </div>
+                    </div>
+
+                    <a class="btn btn-primary rounded-pill py-3 px-5 shadow-lg hover-top"
+                        href="https://mdramritsparsh.netlify.app" target="_blank" rel="noopener noreferrer"
+                        style="font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s ease;">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+    <!-- Service Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+
+                <!-- BIGGER + GREY "Services" Pill -->
+                <div class="d-inline-block rounded-pill py-3 px-5 mb-4 mt-n5" style="background-color: white; 
+            border: 2px solid #e0e7ff; 
+            color: #2563eb; 
+            font-weight: 800; 
+            font-size: 1.2rem; /* Size 0.9 se 1.2 kar diya */
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.15);
+            transition: transform 0.3s ease;">
+                    ✨ Core Features
+                </div>
+                <!-- Heading -->
+                <h1>AI-Powered MDR Surveillance & Hospital Safety Features</h1>
+
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- 1. Patient Clinical Profile -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                        style="width: 65px; height: 65px; overflow: hidden;">
+                        <img src="../img/patient intake logo.jpg" alt="Patient Clinical Insights"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4 class="mb-3">Patient Clinical Insights</h4>
+                    <p class="mb-4">Register patient details, upload existing digital reports, and enter MDR clinical
+                        data.</p>
+                    <a class="btn" href="patient-intake.html"><i class="fa fa-plus text-primary me-3"></i><span>Read
+                            More</span></a>
+                </div>
+            </div>
+
+            <!-- 2. My Patients MDR Control Panel -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                        style="width: 65px; height: 65px; overflow: hidden;">
+                        <img src="../img/patient status pannel logo.jpg" alt="Patient Status Panel"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4 class="mb-3">Patient Status Panel</h4>
+                    <p class="mb-4">Shows all patients with key clinical details and an MDR filter for quick
+                        identification of MDR-positive cases.</p>
+                    <a class="btn" href="patient-status-panel.html"><i
+                            class="fa fa-plus text-primary me-3"></i><span>Read
+                            More</span></a>
+                </div>
+            </div>
+
+            <!-- 3. MDR TraceNet -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                        style="width: 65px; height: 65px; overflow: hidden;">
+                        <img src="../img/MDR tracenet logo.jpg" alt="MDR TraceNet"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4 class="mb-3">MDR TraceNet</h4>
+                    <p class="mb-4">“Real-time MDR contact tracking that logs every visitor, timestamp, duration, and
+                        exposure risk — all in one clean dashboard.”</p>
+                    <a class="btn" href="patient-TraceNet.html"><i class="fa fa-plus text-primary me-3"></i><span>Read
+                            More</span></a>
+                </div>
+            </div>
+
+            <!-- 4. LabSync -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                        style="width: 65px; height: 65px; overflow: hidden;">
+                        <img src="../img/labsync logo.jpg" alt="LabSync"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4 class="mb-3">LabSync</h4>
+                    <p class="mb-4">Seamlessly syncs patient lab data directly from the hospital laboratory.
+                    </p>
+                    <a class="btn" href="lab-report-submission.html"><i
+                            class="fa fa-plus text-primary me-3"></i><span>Read
+                            More</span></a>
+                </div>
+            </div>
+
+            <!-- 5. Doctor’s AI Rounds Assistant -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                        style="width: 65px; height: 65px; overflow: hidden;">
+                        <img src="../img/bad status logo.jpg" alt="Patient Bed Status View"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4 class="mb-3">Patient Bed Status View</h4>
+                    <p class="mb-4">AA live ward view showing empty and occupied beds with patient details and AI-based
+                        risk levels — all in one screen.</p>
+                    <a class="btn" href="smart-ward.html"><i class="fa fa-plus text-primary me-3"></i><span>Read
+                            More</span></a>
+                </div>
+            </div>
+
+            <!-- 6.MDR Screening UI -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                        style="width: 65px; height: 65px; overflow: hidden;">
+                        <img src="../img/MDR screening tool logo.jpg" alt="MDR Screening UI"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4 class="mb-3">MDR Screening UI</h4>
+                    <p class="mb-4">A clean, bilingual hospital UI for quick MDR risk screening with clear Yes/No/Unsure
+                        options and a smart 0–10 risk score.
+                    </p>
+                    <a class="btn" href="MDR Screening UI.html"><i class="fa fa-plus text-primary me-3"></i><span>Read
+                            More</span></a>
+                </div>
+            </div>
+
+            <!-- 7. AI CHATBOT -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                        style="width: 65px; height: 65px; overflow: hidden;">
+                        <img src="../img/ai chatbot logo.jpg" alt="AI CHATBOT"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4 class="mb-3">AI CHATBOT</h4>
+                    <p class="mb-4">A hospital assistant that provides complete patient information, risks, and ward
+                        details instantly</p>
+                    <a class="btn" href="AI-chatbot.html"><i class="fa fa-plus text-primary me-3"></i><span>Read
+                            More</span></a>
+                </div>
+            </div>
+
+            <!-- 8. MDR Case Newsfeed -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                        style="width: 65px; height: 65px; overflow: hidden;">
+                        <img src="../img/news feature logo.jpg" alt="MDR Case Newsfeed"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4 class="mb-3">MDR Case Newsfeed</h4>
+                    <p class="mb-4">A live news-style feed delivering real-time MDR cases and infection rate trends.</p>
+                    <a class="btn" href="newsfeed.html"><i class="fa fa-plus text-primary me-3"></i><span>Read
+                            More</span></a>
+                </div>
+            </div>
+
+            <!-- 9. MDR Care & Safety Protocol Assistant-->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                        style="width: 65px; height: 65px; overflow: hidden;">
+                        <img src="../img/MDR guidence feature logo.jpg" alt="MDR Care & Safety Protocol Assistant"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4 class="mb-3">MDR Care & Safety Protocol Assistant</h4>
+                    <p class="mb-4">A digital assistant that delivers quick, accurate MDR care guidelines for doctors,
+                        nurses, staff, and visitors.</p>
+                    <a class="btn" href="guidelines.html"><i class="fa fa-plus text-primary me-3"></i><span>Read
+                            More</span></a>
+                </div>
+            </div>
+
+
+            <!-- 11. camera  -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                        style="width: 65px; height: 65px; overflow: hidden;">
+                        <img src="../img/patient status pannel logo.jpg" alt="Patient Status Panel"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4 class="mb-3">camera </h4>
+                    <p class="mb-4">Shows all patients with key clinical details and an MDR filter for quick
+                        identification of MDR-positive cases.</p>
+                    <a class="btn" href="../backend/static/mdr_tracking/phototracking.html"><i
+                            class="fa fa-plus text-primary me-3"></i><span>Read
+                            More</span></a>
+                </div>
+            </div>
+
+
+            <!-- 12. Tracking UI -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                        style="width: 65px; height: 65px; overflow: hidden;">
+                        <img src="../img/patient status pannel logo.jpg" alt="Patient Status Panel"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4 class="mb-3">Tracking UI</h4>
+                    <p class="mb-4">Shows all patients with key clinical details and an MDR filter for quick
+                        identification of MDR-positive cases.</p>
+                    <a class="btn" href="../backend/MDR Distance/Frontend - Copy - Copy/index.html"><i
+                            class="fa fa-plus text-primary me-3"></i><span>Read
+                            More</span></a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+    <!-- Service End -->
+
+
+    <!-- Feature Start -->
+    <div class="container-fluid bg-primary overflow-hidden my-5 px-lg-0">
+        <div class="container feature px-lg-0">
+            <div class="row g-0 mx-lg-0">
+                <div class="col-lg-6 feature-text py-5 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="p-lg-5 ps-lg-0">
+                        <div class="d-inline-block border rounded-pill py-3 px-5 mt-n5 mb-4"
+                            style="background: linear-gradient(90deg, #00b09b 0%, #96c93d 100%); border: none !important; color: #ffffff; font-weight: 700; font-size: 1.2rem; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0, 176, 155, 0.4);">
+                            Live Surveillance
+                        </div>
+                        <h1 class="text-white mb-4">MDR Live Tracking & AI Exposure Analysis</h1>
+                        <p class="text-white mb-4 pb-2">Amrit Sparsh continuously monitors MDR-positive patients, tracks
+                            their movement across hospital wards, detects exposure chains automatically, and generates
+                            real-time AI risk alerts to support early infection-control action.</p>
+
+                        <div class="row g-4">
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light"
+                                        style="width: 55px; height: 55px;">
+                                        <i class="fa fa-route text-primary"></i>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h5 class="text-white mb-0">Live Patient Movement</h5>
+                                        <p class="text-white mb-2">Real-time tracking of transfers</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light"
+                                        style="width: 55px; height: 55px;">
+                                        <i class="fa fa-project-diagram text-primary"></i>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h5 class="text-white mb-0">Exposure Chain Mapping</h5>
+                                        <p class="text-white mb-2">Auto-detect contacts & spread</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light"
+                                        style="width: 55px; height: 55px;">
+                                        <i class="fa fa-chart-line text-primary"></i>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h5 class="text-white mb-0">AI Risk Scoring</h5>
+                                        <p class="text-white mb-2">Predictive alerts based on data</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light"
+                                        style="width: 55px; height: 55px;">
+                                        <i class="fa fa-map-marked-alt text-primary"></i>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h5 class="text-white mb-0">Interactive Hospital Map</h5>
+                                        <p class="text-white mb-2">Visual hotspots & isolation zones</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="newsfeed.html" class="btn btn-light btn-lg mt-3">View Live MDR Dashboard</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 pe-lg-0 wow fadeIn" data-wow-delay="0.5s" style="min-height: 400px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute img-fluid w-100 h-100"
+                            src="../img/mdr_live_tracking_dashboard.png"
+                            style="object-fit: cover; object-position: center;"
+                            alt="MDR Live Tracking & AI Exposure Analysis">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Feature End -->
+
+    <!--youtube video -->
+    <section class="max-w-4xl mx-auto px-6 py-12">
+
+        <div class="relative w-full">
+
+            <div class="absolute -inset-2 bg-gradient-to-r from-blue-600 to-teal-400 rounded-2xl blur-lg opacity-40">
+            </div>
+
+            <div
+                class="relative w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/W9DRAt3mJeY?rel=0&autoplay=1&mute=1"
+                    title="Amrit Sparsh Demo" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+        </div>
+
+    </section>
+    <!--youtube video  -->
+
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/notification.css">
+
+    <!-- Feature Start -->
+    <div class="container-fluid bg-primary overflow-hidden my-5 px-lg-0">
+        <div class="container feature px-lg-0">
+            <div class="row g-0 mx-lg-0">
+                <div class="col-lg-6 feature-text py-5 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="p-lg-5 ps-lg-0">
+                        <div class="d-inline-block border rounded-pill py-3 px-5 mt-n5 mb-4"
+                            style="background: linear-gradient(90deg, #00b09b 0%, #96c93d 100%); border: none !important; color: #ffffff; font-weight: 700; font-size: 1.2rem; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0, 176, 155, 0.4);">
+                            Features
+                        </div>
+                        <h1 class="text-white mb-4">How Amrit Sparsh Works</h1>
+                        <p class="text-white mb-4 pb-2">A comprehensive AI-driven workflow that identifies, predicts,
+                            and contains MDR pathogens before they cause outbreaks. Four simple yet powerful stages
+                            ensure complete hospital-wide safety.</p>
+                        <div class="row g-4">
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light"
+                                        style="width: 55px; height: 55px;">
+                                        <i class="fa fa-user-md text-primary"></i>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h5 class="text-white mb-0">One Portal</h5>
+                                        <p class="text-white mb-2">EHR, LIMS, ABHA — all integrated</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light"
+                                        style="width: 55px; height: 55px;">
+                                        <i class="fa fa-check text-primary"></i>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h5 class="text-white mb-0">Visualize & Alerts</h5>
+                                        <p class="text-white mb-2">Ward-level pathogen maps & exposure chains</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light"
+                                        style="width: 55px; height: 55px;">
+                                        <i class="fa fa-comment-medical text-primary"></i>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h5 class="text-white mb-0">Data Collection</h5>
+                                        <p class="text-white mb-2">Seamless EHR, LIMS & ABHA integration</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-light"
+                                        style="width: 55px; height: 55px;">
+                                        <i class="fa fa-headphones text-primary"></i>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h5 class="text-white mb-0">Exposure Chain Detection</h5>
+                                        <p class="text-white mb-2">Auto-detects infection spread paths inside the
+                                            hospital</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 pe-lg-0 wow fadeIn" data-wow-delay="0.5s" style="min-height: 400px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute img-fluid w-100 h-100"
+                            src="../img/why_choose_amrit_sparsh_landscape.png"
+                            style="object-fit: cover; object-position: center; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"
+                            alt="Why Choose Amrit Sparsh - AI-Powered MDR Pathogen Tracing System">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Feature End -->
+
+
+
+
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer mt-3 pt-3 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-3">
+            <div class="row g-3">
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-2">Contact</h5>
+                    <p class="mb-1"><i class="fa fa-map-marker-alt me-3"></i>Indore, (M.P.)</p>
+                    <p class="mb-1"><i class="fa fa-phone-alt me-3"></i>Contact: team@amritsparsh.org</p>
+                    <p class="mb-1"><i class="fa fa-envelope me-3"></i>team@amritsparsh.org</p>
+                    <p class="mb-1" style="font-size: 0.85rem; font-style: italic;"><i
+                            class="fa fa-shield-alt me-2"></i>ABHA secured • HIPAA compliant</p>
+                    <div class="d-flex pt-2">
+
+
+
+
+                        <a class="btn btn-outline-light btn-social rounded-circle" href="https://youtu.be/W9DRAt3mJeY"
+                            target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="flex flex-col space-y-4">
+
+                    <a href="javascript:void(0)" onclick="openMyVideo()"
+                        class="d-flex align-items-center gap-2 text-decoration-none"
+                        style="cursor: pointer; color: #cbd5e1;">
+
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                        </svg>
+
+                        <span style="font-weight: 500; font-size: 1rem; color: #e2e8f0; margin-left: 8px;">Watch
+                            Demo</span>
+                    </a>
+
+                </div>
+                <div class="container">
+                    <div class="copyright">
+                        <div class="row">
+                            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                                &copy; <a class="border-bottom" href="#">Amrit Sparsh</a>
+                            </div>
+                            <div class="col-md-6 text-center text-md-end">
+                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                                Designed By <a class="border-bottom" href="">Amrit Sparsh Team</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+
+            <!-- Video Modal -->
+            <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content bg-dark">
+                        <div class="modal-header border-0">
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-0">
+                            <div class="ratio ratio-16x9">
+                                <iframe id="videoFrame" src="" title="Amrit Sparsh Demo" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Back to Top -->
+            <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
+                    class="bi bi-arrow-up"></i></a>
+
+
+            <!-- Patient Tracking Modal -->
+            <div class="modal fade" id="patientTrackingModal" tabindex="-1" aria-labelledby="patientTrackingModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content" style="border-radius: 20px; border: none;">
+                        <div class="modal-header"
+                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 20px 20px 0 0;">
+                            <h3 class="modal-title" id="patientTrackingModalLabel">
+                                <i class="fas fa-user-check me-2"></i>Real-Time MDR Patient Tracking
+                            </h3>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-4" style="background: #f8f9fa;">
+                            <div class="mb-4">
+                                <h5 class="text-primary mb-3"><i class="fas fa-info-circle me-2"></i>AI-Powered Patient
+                                    Movement
+                                    Monitoring</h5>
+                                <p class="text-muted" style="line-height: 1.8;">
+                                    Continuously track patient movement across wards, ICU, OT, NICU, and diagnostic
+                                    areas.
+                                    Automatically log bed changes, transfers, staff interactions, and environmental
+                                    exposure
+                                    risks. The system analyzes every movement in real-time to detect MDR threats and
+                                    alert
+                                    infection-control teams instantly.
+                                </p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h5 class="text-primary mb-3"><i class="fas fa-tasks me-2"></i>Key Capabilities</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2"><i
+                                                    class="fas fa-check-circle text-success me-2"></i>GPS-like
+                                                indoor tracking for all wards</li>
+                                            <li class="mb-2"><i
+                                                    class="fas fa-check-circle text-success me-2"></i>Automatic
+                                                movement & transfer logging</li>
+                                            <li class="mb-2"><i
+                                                    class="fas fa-check-circle text-success me-2"></i>AI-based
+                                                exposure path analysis</li>
+                                            <li class="mb-2"><i
+                                                    class="fas fa-check-circle text-success me-2"></i>Ward-wise
+                                                hotspot identification</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2"><i
+                                                    class="fas fa-check-circle text-success me-2"></i>Real-time
+                                                patient risk scoring</li>
+                                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Visual
+                                                movement timeline</li>
+                                            <li class="mb-2"><i
+                                                    class="fas fa-check-circle text-success me-2"></i>Instant
+                                                exposure alerts</li>
+                                            <li class="mb-2"><i
+                                                    class="fas fa-check-circle text-success me-2"></i>Contact graph
+                                                showing all connections</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h5 class="text-primary mb-3"><i class="fas fa-lightbulb me-2"></i>How It Works</h5>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                                            style="width: 40px; height: 40px; flex-shrink: 0;">1</div>
+                                        <div>
+                                            <h6 class="mb-1">Patient Check-In</h6>
+                                            <p class="text-muted mb-0 small">System registers patient entry and assigns
+                                                unique
+                                                tracking ID</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                                            style="width: 40px; height: 40px; flex-shrink: 0;">2</div>
+                                        <div>
+                                            <h6 class="mb-1">Movement Monitoring</h6>
+                                            <p class="text-muted mb-0 small">AI tracks patient across wards, ICU, OT,
+                                                and
+                                                diagnostic areas in real-time</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                                            style="width: 40px; height: 40px; flex-shrink: 0;">3</div>
+                                        <div>
+                                            <h6 class="mb-1">Exposure Detection</h6>
+                                            <p class="text-muted mb-0 small">System identifies contact with MDR-positive
+                                                zones
+                                                or patients</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                                            style="width: 40px; height: 40px; flex-shrink: 0;">4</div>
+                                        <div>
+                                            <h6 class="mb-1">Instant Alerts</h6>
+                                            <p class="text-muted mb-0 small">Infection control team receives real-time
+                                                notifications for immediate action</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-info" role="alert" style="border-left: 4px solid #0dcaf0;">
+                                <i class="fas fa-hospital me-2"></i><strong>Hospital-Grade Accuracy:</strong> Our system
+                                uses
+                                advanced IoT sensors and AI algorithms to ensure 99.8% tracking precision across all
+                                hospital
+                                zones.
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="background: white; border-radius: 0 0 20px 20px;">
+                            <button type="button" class="btn btn-secondary rounded-pill"
+                                data-bs-dismiss="modal">Close</button>
+                            <a href="https://mdramritsparsh.netlify.app" target="_blank"
+                                class="btn btn-primary rounded-pill">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Patient Tracking Modal -->
+
+
+            <!-- JavaScript Libraries -->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="../lib/wow/wow.min.js"></script>
+            <script src="../lib/easing/easing.min.js"></script>
+            <script src="../lib/waypoints/waypoints.min.js"></script>
+            <!-- Hero Banner JS -->
+            <script src="../js/hero-banner.js"></script>
+            <script src="../lib/counterup/counterup.min.js"></script>
+            <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="../lib/tempusdominus/js/moment.min.js"></script>
+            <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
+            <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+            <!-- Template Javascript -->
+            <script src="../js/main.js"></script>
+            <script src="../js/notification.js"></script>
+</body>
+
+</html>

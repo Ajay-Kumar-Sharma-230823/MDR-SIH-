@@ -1,0 +1,404 @@
+:root {
+    --primary-blue: #0B61A4;
+    --accent-teal: #0FA3B1;
+    --dark-blue: #004e8c;
+    --text-dark: #1e293b;
+    --text-gray: #64748b;
+    --bg-light: #f0f4f8;
+    --white: #ffffff;
+    --border-color: #e2e8f0;
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f0f4f8 0%, #e3f2fd 100%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+}
+
+/* --- Header --- */
+.login-header {
+    height: 90px;
+    /* Taller header */
+    display: flex;
+    justify-content: center;
+    /* Center content wrapper */
+    align-items: center;
+    padding: 0;
+    background: #ffffff;
+    border-bottom: 8px solid #0056b3;
+    /* Thick blue bar */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header-content-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.brand-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-logo {
+    height: 60px;
+    /* Larger logo */
+    width: auto;
+}
+
+.header-title {
+    font-weight: 700;
+    font-size: 2.5rem;
+    /* Larger to match reference */
+    color: #0066ff;
+    /* Brighter blue to match reference */
+    letter-spacing: -0.5px;
+    margin-left: 15px;
+    font-family: 'Inter', sans-serif;
+    /* Ensure clean font */
+}
+
+.brand-right {
+    display: flex;
+    align-items: center;
+}
+
+/* --- Header Nav (right side) --- */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-link {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #0f172a;
+    text-decoration: none;
+    letter-spacing: 0.2px;
+}
+
+.nav-link.active {
+    color: #0066ff;
+}
+
+.nav-item.dropdown .caret,
+.nav-item.greeting .caret {
+    margin-left: 6px;
+    font-size: 0.8rem;
+    color: #334155;
+}
+
+.nav-item.greeting {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #0f172a;
+    font-weight: 600;
+}
+
+.nav-item.greeting .text strong {
+    color: #0f172a;
+}
+
+.nav-item.greeting .wave {
+    font-size: 1rem;
+}
+
+/* --- Main Container --- */
+.login-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+}
+
+.login-card {
+    background: var(--white);
+    width: 900px;
+    height: 550px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    display: flex;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* --- Left Visual Column --- */
+.login-visual {
+    flex: 0.8;
+    /* Use the reference image as background, positioned to show the left side */
+    background: url('../img/login-reference.png') no-repeat left center;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    color: var(--white);
+    padding: 3rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Hide overlay and content since image has them */
+.visual-overlay,
+.visual-content {
+    display: none;
+}
+
+/* --- Right Form Column --- */
+.login-form-section {
+    flex: 1.2;
+    padding: 3rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--primary-blue);
+    /* Blue label color */
+    margin-bottom: 8px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+/* Remove icons inside input for cleaner look matching reference */
+.input-icon {
+    display: none;
+}
+
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 14px 16px;
+    /* Larger padding */
+    border: 1px solid #bfdbfe;
+    /* Light blue border */
+    border-radius: 12px;
+    /* More rounded */
+    font-size: 1rem;
+    color: var(--text-dark);
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(11, 97, 164, 0.1);
+}
+
+.toggle-password {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-gray);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.toggle-password:hover {
+    color: var(--primary-blue);
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 20px;
+}
+
+.form-group.half {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.form-actions {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    cursor: pointer;
+}
+
+.forgot-link {
+    font-size: 0.8rem;
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+.security-hint {
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* --- Login Button (The "Tagda" Button) --- */
+.login-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 30px;
+    /* Pill shape */
+    background: linear-gradient(90deg, #0f172a 0%, #0B61A4 100%);
+    /* Dark to Blue */
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    /* Cyan Glow Border Effect */
+    box-shadow: 0 0 0 1px rgba(15, 163, 177, 0.5), 0 10px 20px -5px rgba(11, 97, 164, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 2px rgba(15, 163, 177, 0.8), 0 15px 25px -5px rgba(11, 97, 164, 0.5);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.btn-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+    transform: scale(0);
+    transition: transform 0.5s;
+    z-index: 1;
+}
+
+.login-btn:hover .btn-glow {
+    transform: scale(1);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 0.3;
+        transform: scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+}
+
+/* --- Right Security Panel --- */
+.security-badge-panel {
+    display: none;
+    /* Hide for now as reference doesn't show it explicitly outside card */
+}
+
+/* Spinner */
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-top: 2px solid #0FA3B1;
+    /* Cyan spinner */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: block;
+    /* Always show as per reference image static state */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.login-btn.loading .spinner {
+    display: block;
+}

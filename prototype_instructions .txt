@@ -1,0 +1,38 @@
+
+Prototype Setup & Usage Instructions
+====================================
+
+1. Install Python
+   - Download and install Python 3.10 or above from: https://www.python.org/downloads/
+
+2. Create Virtual Environment
+   - Run:
+       python -m venv venv
+   - Activate:
+       Windows: venv\Scripts\activate
+       Linux/Mac: source venv/bin/activate
+
+3. Install Required Packages
+   - With venv activated, run:
+       pip install -r requirements.txt
+
+4. Run Backend
+   - Navigate to backend folder:
+       cd backend
+   - Start server:
+       uvicorn main:app --reload
+
+5. Open Frontend
+   - Go to:
+       index.html (open in browser)
+   - Login using:
+       Email: krish@gmail.com
+       Password: krishna123
+
+6. Check MDR Tracking Feature
+   - In the MDR feature, you will be asked to upload an image.
+   - The image will be provided through the feature's camera interface.
+
+7. Tracking UI
+   - A video upload option will appear.
+   - Use the provided video to test the Tracking UI functionality.

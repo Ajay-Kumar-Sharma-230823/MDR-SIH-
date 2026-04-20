@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: #eef2f8;
+}
+
+/* TOP BLUE HEADER */
+.top-banner {
+    background: #0a73ff;
+    padding: 35px 20px;
+    text-align: center;
+    color: white;
+}
+
+.top-banner h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.top-banner p {
+    margin: 6px 0 0;
+    opacity: 0.9;
+}
+
+/* MAIN CONTENT */
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: -40px;
+}
+
+/* CARD */
+.camera-card {
+    background: white;
+    width: 85%;
+    max-width: 900px;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+}
+
+.card-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #0a3d62;
+}
+
+/* CAMERA BOX */
+.camera-box {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    background: #d9e6f7;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#webcam, #overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* STATUS PANEL */
+.status-panel {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.status-item {
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+}
+
+.status-dot {
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+    border-radius: 50%;
+}
+
+.gray { background: gray; }
+.green { background: #28a745; }
+.red { background: #ff3838; }
+.yellow { background: #f1c40f; }
+
+/* BUTTON */
+.start-btn {
+    width: 100%;
+    padding: 12px;
+    background: #0a73ff;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 25px;
+    cursor: pointer;
+}
+
+.start-btn:hover {
+    background: #065ad9;
+}

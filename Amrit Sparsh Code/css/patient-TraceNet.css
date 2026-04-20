@@ -1,0 +1,509 @@
+/* ==========================================================================
+   MDR PATIENT TRACENET - DARK HIGH TECH THEME
+   ========================================================================== */
+
+:root {
+    /* -- Dark Neon Palette -- */
+    --bg-dark: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.7);
+    --bg-card-hover: rgba(51, 65, 85, 0.8);
+
+    --primary-blue: #3b82f6;
+    --primary-glow: rgba(59, 130, 246, 0.5);
+
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-light: #cbd5e1;
+
+    --glass-border: rgba(255, 255, 255, 0.1);
+
+    /* -- Fonts -- */
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    overflow-x: hidden;
+
+    /* Neon Tech Grid Background */
+    background-image:
+        linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+        radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.8) 0%, transparent 80%);
+    background-size: 50px 50px, 50px 50px, 100% 100%;
+    background-position: center top;
+}
+
+/* Abstract Pulse Circles (Ethereal Glows) */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+    z-index: -1;
+    animation: drift 20s infinite alternate linear;
+}
+
+body::before {
+    width: 800px;
+    height: 800px;
+    top: -200px;
+    left: -200px;
+}
+
+body::after {
+    width: 600px;
+    height: 600px;
+    bottom: -100px;
+    right: -100px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+    animation-delay: -5s;
+}
+
+@keyframes drift {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(50px, 50px);
+    }
+}
+
+/* ==========================================================================
+   LAYOUT & CONTAINER
+   ========================================================================== */
+
+.search-panel-wrapper {
+    padding: 40px 20px;
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 1000px;
+    position: relative;
+    z-index: 10;
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+.panel-header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.system-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+}
+
+.system-subtitle {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   SEARCH BAR
+   ========================================================================== */
+
+.search-box-container {
+    position: relative;
+    margin-bottom: 40px;
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+.search-box {
+    width: 100%;
+    padding: 22px 60px 22px 28px;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 1.1rem;
+    color: var(--text-main);
+    font-family: var(--font-body);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-box:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    background: rgba(30, 41, 59, 0.9);
+}
+
+.search-box::placeholder {
+    color: var(--text-muted);
+    font-weight: 300;
+}
+
+.search-icon {
+    position: absolute;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-blue);
+    opacity: 0.8;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 5px var(--primary-blue));
+}
+
+.search-box:focus+.search-icon {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+    filter: drop-shadow(0 0 10px var(--primary-glow));
+}
+
+/* ==========================================================================
+   DROPDOWN & SUGGESTIONS
+   ========================================================================== */
+
+.suggestions-dropdown {
+    position: absolute;
+    top: calc(100% + 15px);
+    left: 10px;
+    right: 10px;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(16px);
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    z-index: 100;
+    display: none;
+    transform-origin: top center;
+}
+
+.suggestions-dropdown.active {
+    display: block;
+    animation: dropdownEnter 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.suggestion-item {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-light);
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--text-main);
+    padding-left: 28px;
+    border-left: 3px solid var(--primary-blue);
+}
+
+/* ==========================================================================
+   PATIENT CARD
+   ========================================================================== */
+
+.patient-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    margin-bottom: 24px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--text-main);
+    overflow: hidden;
+}
+
+.patient-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.5);
+    border-color: var(--primary-blue);
+    background: var(--bg-card-hover);
+}
+
+.patient-card h3 {
+    font-family: var(--font-heading);
+    color: var(--primary-blue);
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.patient-card p {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Expanded Card override */
+.patient-card.bg-white {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--primary-blue) !important;
+}
+
+/* Button Styling */
+button {
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+button.bg-blue-600 {
+    background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    border: 1px solid rgba(59, 130, 246, 0.5);
+    color: white;
+}
+
+button.bg-blue-600:hover {
+    background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   VISITOR SECTION
+   ========================================================================== */
+
+#visitor-section {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid var(--glass-border);
+    margin-top: 40px;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+#visitor-section h2 {
+    font-family: var(--font-heading);
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+    border-bottom: 2px solid rgba(59, 130, 246, 0.2);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+/* Visitor List Items */
+#visitor-list>div {
+    background: rgba(30, 41, 59, 0.5) !important;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: var(--text-main);
+    padding: 16px 20px !important;
+    transition: all 0.3s ease;
+}
+
+#visitor-list>div strong {
+    color: var(--primary-blue);
+    font-family: var(--font-heading);
+    letter-spacing: 0.5px;
+}
+
+#visitor-list>div p {
+    color: var(--text-muted);
+}
+
+#visitor-list>div:hover {
+    transform: translateX(5px);
+    border-left: 4px solid var(--primary-blue);
+    background: rgba(30, 41, 59, 0.9) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================================
+   EMPTY STATE
+   ========================================================================== */
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 20px;
+    opacity: 0.6;
+    animation: fadeIn 1s ease;
+}
+
+.empty-icon {
+    width: 140px;
+    height: 140px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+}
+
+.empty-message {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes dropdownEnter {
+    from {
+        opacity: 0;
+        transform: scaleY(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+/* ==========================================================================
+   MODAL Styling
+   ========================================================================== */
+#visitor-modal {
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#visitor-modal>div {
+    background: #1e293b;
+    border: 1px solid var(--primary-blue);
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
+    border-radius: 24px;
+    color: var(--text-main);
+    animation: zoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#visitor-modal h2 {
+    font-family: var(--font-heading);
+    color: var(--primary-blue);
+    letter-spacing: 0.5px;
+}
+
+#visitor-modal label {
+    color: var(--text-light);
+}
+
+#visitor-modal input,
+#visitor-modal select {
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: white;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+#visitor-modal input:focus,
+#visitor-modal select:focus {
+    background: #0f172a;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Fix for Date/Time icons in dark mode */
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+/* Navbar overrides for dark mode if needed (or stick with white nav) */
+/* Assuming navbar is white, we might leave it for contrast, or update it separately. 
+   If user wants FULL dark, we'd style nav too, but focusing on the page content first. */
+
+/* SOS Button */
+.sos-btn {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    animation: pulse-red 2s infinite;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.sos-btn:hover {
+    background: linear-gradient(135deg, #ef4444 0%, #fca5a5 100%);
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.7);
+    transform: translateY(-1px);
+}
+
+@keyframes pulse-red {
+    0% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+}

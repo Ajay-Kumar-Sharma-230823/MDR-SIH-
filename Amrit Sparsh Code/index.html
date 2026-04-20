@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amrit Sparsh — Doctor Login</title>
+    <link rel="stylesheet" href="css/login.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Top Header -->
+    <header class="login-header">
+        <div class="header-content-wrapper">
+            <div class="brand-left">
+                <img src="img/amrit_sparsh_logo.png" alt="Amrit Sparsh Logo" class="header-logo">
+                <h1 class="header-title">Amrit Sparsh</h1>
+            </div>
+            <div class="brand-right">
+                <nav class="main-nav">
+
+
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Login Container -->
+    <div class="login-container">
+        <div class="login-card">
+
+            <!-- Left Visual Column -->
+            <div class="login-visual">
+                <div class="visual-content">
+                    <!-- Content hidden via CSS or removed here to be safe -->
+                </div>
+                <div class="visual-overlay"></div>
+            </div>
+
+            <!-- Right Form Column -->
+            <div class="login-form-section">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" id="email" value="doctor@hospital.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="password" value="password" required>
+                            <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="checkbox-container">
+                            <input type="checkbox" checked>
+                            <span class="checkmark"></span>
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-link">Forgot password?</a>
+                    </div>
+
+                    <div class="security-hint">
+                        <i class="fas fa-shield-alt"></i> Two-factor authentication will be required after login.
+                    </div>
+
+                    <button type="submit" class="login-btn">
+                        <span class="btn-content">
+                            <span class="spinner"></span>
+                            Sign in — Access Dashboard
+                        </span>
+                        <div class="btn-glow"></div>
+                    </button>
+
+                    <div class="create-account-section">
+                        <p>Don't have an account? <a href="pages/create.html">Create Account</a></p>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Right Security Panel -->
+        <div class="security-badge-panel">
+            <div class="badge-item">
+                <i class="fas fa-lock"></i>
+                <span>Secure · HIPAA/NDHM compliant</span>
+            </div>
+            <div class="badge-item">
+                <i class="fas fa-key"></i>
+                <span>2-Factor auth required</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+
+</html>

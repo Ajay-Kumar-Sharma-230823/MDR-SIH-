@@ -1,0 +1,65 @@
+/* Custom font stack base */
+.as-base-font {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Soft glowing particle animation */
+@keyframes float-particle {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translateY(-10%) translateX(5%);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.5;
+    }
+}
+
+/* Gentle pulse for badge dot */
+@keyframes pulse-dot {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.9);
+        opacity: 0.7;
+    }
+}
+
+/* Subtle orb glow pulse */
+@keyframes orb-glow-pulse {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+/* Focus outline for accessibility */
+.as-focus-visible:focus-visible {
+    outline: 2px solid rgba(20, 184, 166, 0.8);
+    outline-offset: 3px;
+}
+
+@view-transition {
+    navigation: auto;
+}

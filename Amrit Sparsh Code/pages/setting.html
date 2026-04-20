@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" class="h-full w-full">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Settings Coming Soon - Amrit Sparsh</title><!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script><!-- Canva SDKs -->
+    <script src="/_sdk/element_sdk.js"></script>
+    <link rel="stylesheet" href="../css/setting.css">
+    <style>
+        @view-transition {
+            navigation: auto;
+        }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+</head>
+
+<body class="h-full w-full">
+    <header aria-hidden="true"></header>
+    <nav aria-hidden="true"></nav>
+    <main class="w-full h-full flex items-center justify-center px-4 py-8">
+        <div id="app-root" class="w-full h-full flex items-center justify-center relative overflow-hidden">
+            <!-- Subtle background gradient shapes -->
+            <div id="bg-shape-1"
+                class="absolute top-20 left-10 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none"
+                style="animation: float-gentle 20s ease-in-out infinite;"></div>
+            <div id="bg-shape-2"
+                class="absolute bottom-20 right-10 w-80 h-80 rounded-full blur-3xl opacity-15 pointer-events-none"
+                style="animation: float-gentle 25s ease-in-out infinite; animation-delay: 5s;"></div>
+            <!-- Main content card -->
+            <article id="content-card" class="relative z-10 max-w-2xl w-full rounded-2xl shadow-xl p-12 text-center">
+                <!-- Settings icon -->
+                <div class="flex justify-center mb-6">
+                    <div id="icon-container" class="w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg"
+                        style="animation: pulse-subtle 3s ease-in-out infinite;">
+                        <svg id="settings-icon" class="w-10 h-10" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                </div><!-- Title -->
+                <h1 id="title" class="app-font text-3xl font-bold mb-4 leading-tight">Settings Page Coming Soon</h1>
+                <!-- Subtitle -->
+                <p id="subtitle" class="app-font text-base mb-8 leading-relaxed max-w-lg mx-auto">This feature is under
+                    development and will be available shortly.</p><!-- Divider line -->
+                <div id="divider" class="w-24 h-0.5 mx-auto mb-8 rounded-full"></div><!-- Footer note -->
+                <p id="footer-note" class="app-font text-sm font-medium tracking-wide">Amrit Sparsh – Digital MDR
+                    Tracking System</p>
+            </article>
+        </div>
+    </main>
+    <aside aria-hidden="true"></aside>
+    <footer aria-hidden="true"></footer>
+    <script src="../js/setting.js"></script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'9a5b009d378974f4',t:'MTc2NDM0NDgzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Patient Data Intake - Amrit Sparsh</title>
+
+    <!-- Bootstrap + icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Updated patient styles -->
+    <link rel="stylesheet" href="../css/patient-style.css">
+</head>
+
+<body>
+
+    <!-- Header Section with Background Image -->
+    <div class="header-section" style="background-image: url('../images/66c058dc-d3a5-4e37-a8da-534e7c9d1df5.jpeg');">
+        <div class="header-overlay"></div>
+        <div class="container position-relative z-1">
+            <div class="d-flex align-items-center justify-content-center mb-2">
+                <!-- Icon next to title -->
+                <img src="../img/amrit_sparsh_logo.png" alt="Amrit Sparsh Logo" class="header-icon me-3"
+                    style="width: 50px; height: auto; filter: none;">
+                <h1 class="text-white fw-bold m-0">Patient Data Intake</h1>
+            </div>
+            <p class="text-white-50 text-center mb-0">Register New Patient & Upload Digital Records</p>
+        </div>
+    </div>
+
+    <div class="container main-content">
+        <form id="intakeForm">
+            <!-- Basic Info Card -->
+            <div class="medical-card position-relative">
+
+                <div class="card-header-custom">
+                    <i class="fas fa-user-injured"></i>
+                    <h3>Patient Basic Information</h3>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="fullName" class="form-label">Patient Full Name</label>
+                        <input id="fullName" name="fullName" required type="text" class="form-control"
+                            placeholder="Enter full name">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="age" class="form-label">Age</label>
+                        <input id="age" name="age" required type="number" class="form-control" placeholder="Age">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="gender" class="form-label">Gender</label>
+                        <select id="gender" name="gender" required class="form-select">
+                            <option value="">Select...</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="admissionDate" class="form-label">Admission Date</label>
+                        <input id="admissionDate" name="admissionDate" required type="date" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="admissionTime" class="form-label">Admission Time</label>
+                        <input id="admissionTime" name="admissionTime" required type="time" class="form-control">
+                    </div>
+
+                    <div class="col-12">
+                        <label for="reason" class="form-label">Reason for Admission</label>
+                        <textarea id="reason" name="reason" class="form-control" rows="2"
+                            placeholder="Brief description of symptoms or diagnosis"></textarea>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="ward" class="form-label">Ward / Bed Number</label>
+                        <input id="ward" name="ward" type="text" class="form-control" placeholder="e.g. ICU-04">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="doctor" class="form-label">Assigned Doctor</label>
+                        <input id="doctor" name="doctor" type="text" class="form-control" placeholder="Dr. Name">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add MDR Details Button -->
+            <div class="mb-4">
+                <button id="toggleMdrBtn" aria-expanded="false" aria-controls="mdrPanel" type="button"
+                    class="btn w-100">
+                    <i class="fas fa-plus-circle me-2"></i> Add MDR Clinical Details (Optional)
+                </button>
+            </div>
+
+            <!-- MDR Panel (collapsible) -->
+            <div id="mdrPanel" class="medical-card" style="display:none; opacity:0;">
+                <div class="card-header-custom text-primary">
+                    <i class="fas fa-biohazard"></i>
+                    <h3>MDR Clinical Details</h3>
+                </div>
+
+                <div class="pt-3">
+                    <h6 class="small text-uppercase text-muted fw-bold mb-3">1. MDR Status & Infection Source</h6>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label small">MDR Status</label>
+                            <select id="mdr_status" class="form-select form-select-sm">
+                                <option value="">Select Status</option>
+                                <option value="High Risk">High Risk</option>
+                                <option value="Moderate Risk">Moderate Risk</option>
+                                <option value="Low Risk">Low Risk</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label small">Infection Source</label>
+                            <select id="infection_source" class="form-select form-select-sm">
+                                <option>Hospital-acquired (HAI)</option>
+                                <option>Community-acquired</option>
+                               
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small">Infection Site</label>
+                            <select id="infection_site" class="form-select form-select-sm">
+                                <option>Lungs (Respiratory)</option>
+                                <option>Urinary Tract</option>
+                                <option>Bloodstream</option>
+                                <option>Surgical / Wound</option>
+                                <option>GI Tract</option>
+                                <option>Skin / Soft Tissue</option>
+                                <option>Catheter / IV Line</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <h6 class="small text-uppercase text-muted fw-bold mb-3">2. Microbiology & Sample Information</h6>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-3">
+                            <label class="form-label small">Sample Type</label>
+                            <select id="sample_type" class="form-select form-select-sm">
+                                <option>Blood</option>
+                                <option>Urine</option>
+                                <option>Sputum</option>
+                                <option>CSF</option>
+                                <option>Wound Swab</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small">Collection Date</label>
+                            <input id="sample_date" type="date" class="form-control form-control-sm">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small">Collection Time</label>
+                            <input id="sample_time" type="time" class="form-control form-control-sm">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small">Sample ID</label>
+                            <input id="sample_id" type="text" class="form-control form-control-sm" placeholder="Lab ID">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small">Time to Processing (Hrs)</label>
+                            <input id="time_to_process" readonly class="form-control form-control-sm" placeholder="—">
+                        </div>
+                    </div>
+
+                    <h6 class="small text-uppercase text-muted fw-bold mb-3">3. AST (Antibiotic Susceptibility Test)
+                        Panel</h6>
+                    <div class="table-responsive mb-4 border rounded">
+                        <table id="ast_table" class="table table-sm custom-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th style="width:30%">Antibiotic</th>
+                                    <th style="width:25%">Result (S/I/R)</th>
+                                    <th>MIC Value</th>
+                                    <th>Zone Diameter (mm)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-antibiotic="Ciprofloxacin">
+                                    <td>Ciprofloxacin</td>
+                                    <td><select class="form-select form-select-sm" name="ast_cipro">
+                                            <option>-</option>
+                                            <option value="S">S</option>
+                                            <option value="I">I</option>
+                                            <option value="R">R</option>
+                                        </select></td>
+                                    <td><input class="form-control form-control-sm" name="mic_cipro"></td>
+                                    <td><input class="form-control form-control-sm" name="zone_cipro"></td>
+                                </tr>
+                                <tr data-antibiotic="Amikacin">
+                                    <td>Amikacin</td>
+                                    <td><select class="form-select form-select-sm" name="ast_ami">
+                                            <option>-</option>
+                                            <option value="S">S</option>
+                                            <option value="I">I</option>
+                                            <option value="R">R</option>
+                                        </select></td>
+                                    <td><input class="form-control form-control-sm" name="mic_ami"></td>
+                                    <td><input class="form-control form-control-sm" name="zone_ami"></td>
+                                </tr>
+                                <tr data-antibiotic="Gentamicin">
+                                    <td>Gentamicin</td>
+                                    <td><select class="form-select form-select-sm" name="ast_gent">
+                                            <option>-</option>
+                                            <option value="S">S</option>
+                                            <option value="I">I</option>
+                                            <option value="R">R</option>
+                                        </select></td>
+                                    <td><input class="form-control form-control-sm" name="mic_gent"></td>
+                                    <td><input class="form-control form-control-sm" name="zone_gent"></td>
+                                </tr>
+                                <tr data-antibiotic="Meropenem">
+                                    <td>Meropenem</td>
+                                    <td><select class="form-select form-select-sm" name="ast_mero">
+                                            <option>-</option>
+                                            <option value="S">S</option>
+                                            <option value="I">I</option>
+                                            <option value="R">R</option>
+                                        </select></td>
+                                    <td><input class="form-control form-control-sm" name="mic_mero"></td>
+                                    <td><input class="form-control form-control-sm" name="zone_mero"></td>
+                                </tr>
+                                <tr data-antibiotic="Imipenem">
+                                    <td>Imipenem</td>
+                                    <td><select class="form-select form-select-sm" name="ast_imi">
+                                            <option>-</option>
+                                            <option value="S">S</option>
+                                            <option value="I">I</option>
+                                            <option value="R">R</option>
+                                        </select></td>
+                                    <td><input class="form-control form-control-sm" name="mic_imi"></td>
+                                    <td><input class="form-control form-control-sm" name="zone_imi"></td>
+                                </tr>
+                                <tr data-antibiotic="Piperacillin-Tazobactam">
+                                    <td>Piperacillin-Tazobactam</td>
+                                    <td><select class="form-select form-select-sm" name="ast_pip">
+                                            <option>-</option>
+                                            <option value="S">S</option>
+                                            <option value="I">I</option>
+                                            <option value="R">R</option>
+                                        </select></td>
+                                    <td><input class="form-control form-control-sm" name="mic_pip"></td>
+                                    <td><input class="form-control form-control-sm" name="zone_pip"></td>
+                                </tr>
+                                <tr data-antibiotic="Linezolid">
+                                    <td>Linezolid</td>
+                                    <td><select class="form-select form-select-sm" name="ast_lin">
+                                            <option>-</option>
+                                            <option value="S">S</option>
+                                            <option value="I">I</option>
+                                            <option value="R">R</option>
+                                        </select></td>
+                                    <td><input class="form-control form-control-sm" name="mic_lin"></td>
+                                    <td><input class="form-control form-control-sm" name="zone_lin"></td>
+                                </tr>
+                                <tr data-antibiotic="Vancomycin">
+                                    <td>Vancomycin</td>
+                                    <td><select class="form-select form-select-sm" name="ast_van">
+                                            <option>-</option>
+                                            <option value="S">S</option>
+                                            <option value="I">I</option>
+                                            <option value="R">R</option>
+                                        </select></td>
+                                    <td><input class="form-control form-control-sm" name="mic_van"></td>
+                                    <td><input class="form-control form-control-sm" name="zone_van"></td>
+                                </tr>
+                                <tr data-antibiotic="Colistin">
+                                    <td>Colistin</td>
+                                    <td><select class="form-select form-select-sm" name="ast_col">
+                                            <option>-</option>
+                                            <option value="S">S</option>
+                                            <option value="I">I</option>
+                                            <option value="R">R</option>
+                                        </select></td>
+                                    <td><input class="form-control form-control-sm" name="mic_col"></td>
+                                    <td><input class="form-control form-control-sm" name="zone_col"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h6 class="small text-uppercase text-muted fw-bold mb-3">4. Resistance Gene Markers</h6>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">ESBL Markers</label>
+                            <input id="esbl_markers" class="form-control form-control-sm" placeholder="CTX-M, TEM, SHV">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Carbapenemase</label>
+                            <input id="carb_markers" class="form-control form-control-sm"
+                                placeholder="NDM, KPC, OXA-48">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">MRSA Marker</label>
+                            <input id="mrsa_marker" class="form-control form-control-sm" placeholder="mecA">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">VRE Markers</label>
+                            <input id="vre_markers" class="form-control form-control-sm" placeholder="vanA, vanB">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small fw-bold">Additional Genomic Notes</label>
+                            <textarea id="genomic_notes" class="form-control form-control-sm" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <h6 class="small text-uppercase text-muted fw-bold mb-3">5. Severity & Clinical Notes</h6>
+                    <div class="row g-3 mb-2">
+                        <div class="col-md-6">
+                            <label class="form-label small">Severity Level</label>
+                            <select id="severity_level" class="form-select form-select-sm">
+                                <option>Mild</option>
+                                <option>Moderate</option>
+                                <option>Severe</option>
+                                <option>Critical</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small">MDR Spread Risk (0-10)</label>
+                            <div class="d-flex align-items-center">
+                                <input id="risk_score" class="form-range" type="range" min="0" max="10" step="1"
+                                    value="5">
+                                <output id="risk_value" class="fw-bold ms-2">5</output>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small">Clinical Notes</label>
+                            <textarea id="clinical_notes" class="form-control form-control-sm" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Section -->
+            <div id="uploadSection" class="medical-card">
+                <div class="card-header-custom">
+                    <i class="fas fa-file-medical"></i>
+                    <h3>Upload Existing Patient Digital Records (Optional)</h3>
+                </div>
+
+                <div id="uploadArea" class="upload-area">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <h4>Drag & Drop files here</h4>
+                    <p class="small">or click to browse (PDF, JPG, DOC)</p>
+                    <input id="fileInput" type="file" multiple style="display:none;">
+                </div>
+
+                <div id="fileList" class="file-list"></div>
+            </div>
+
+            <!-- Submit -->
+            <div class="d-grid mb-5">
+                <button id="registerSaveBtn" type="submit" class="btn btn-primary-custom">
+                    <i class="fas fa-save me-2"></i> Register Patient & Save
+                </button>
+            </div>
+        </form>
+
+        <div class="page-space"></div>
+    </div>
+
+    <script src="../js/patient-intake.js"></script>
+</body>
+
+</html>

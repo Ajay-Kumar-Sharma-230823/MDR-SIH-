@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Status Panel - Amrit Sparsh</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/patient-status-panel.css?v=11">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navbar Start -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="../img/amrit_sparsh_logo.png" alt="Amrit Sparsh Logo" class="nav-logo">
+            <span class="nav-title">Amrit Sparsh</span>
+        </div>
+        <div class="navbar-links">
+            <a href="../index.html" class="nav-link">Home</a>
+
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle active">Pages <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu">
+                    <a href="patient-intake.html" class="dropdown-item">1. Patient Clinical Insights</a>
+                    <a href="patient-status-panel.html" class="dropdown-item">2. Patient Status Panel</a>
+                    <a href="patient-TraceNet.html" class="dropdown-item">3. MDR TraceNet</a>
+                </div>
+            </div>
+
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle">👋 Hey Team <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu">
+                    <a href="my-profile.html" class="dropdown-item">My Profile</a>
+                    <a href="#" class="dropdown-item">Settings</a>
+                    <a href="../index.html" class="dropdown-item">Logout</a>
+                </div>
+            </div>
+
+            <!-- Alert Option (Explicit Link) -->
+            <a href="#" class="nav-link"
+                style="color: #006CFF; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                Alerts <i class="fas fa-bell"></i>
+                <span class="notification-dot"
+                    style="display: inline-block; width: 8px; height: 8px; background: red; border-radius: 50%; margin-bottom: 8px;"></span>
+            </a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <div class="panel-container">
+
+        <!-- HEADER -->
+        <div class="panel-header">
+            <!-- Row 1: Title & Meta -->
+            <div class="header-top">
+                <div class="title-section">
+                    <img src="../img/header-logo.jpeg" alt="Amrit Sparsh Logo" class="header-logo">
+                    <div>
+                        <h1>PATIENT STATUS PANEL</h1>
+                        <p>Amrit Sparsh – MDR Monitoring Snapshot</p>
+                    </div>
+                </div>
+
+                <div class="header-actions">
+                    <!-- Date / Time -->
+                    <div class="header-meta">
+                        <div><strong>Date:</strong> <span id="current-date">Loading...</span></div>
+                        <div><strong>Time:</strong> <span id="current-time">Loading...</span></div>
+                    </div>
+
+                    <!-- MDR FILTER -->
+                    <div class="filter-control">
+                        <span class="filter-label">MDR Filter:</span>
+                        <span id="filter-status" class="filter-status">OFF</span>
+                        <div id="mdr-toggle" class="toggle-switch">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: Prominent Search -->
+            <div class="header-search-section">
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <input id="patient-search" class="search-input"
+                            placeholder="Search patients by Name, ABHA Number, or Doctor...">
+                        <div id="search-clear" class="search-clear">×</div>
+                    </div>
+                    <div id="search-dropdown" class="search-dropdown"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABLE -->
+        <table class="status-table">
+            <thead>
+                <tr>
+                    <th>Room / Bed</th>
+                    <th>Patient Information</th>
+                    <th>Attending Physician</th>
+                    <th>MDR Status</th>
+                    <th>Infection Site</th>
+                    <th>MDR Risk Score</th>
+                    <th>Clinical Notes / Alerts</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <!-- Dynamic data goes here -->
+            <tbody id="patient-table-body">
+                <tr>
+                    <td colspan="8" style="padding:30px;text-align:center;color:#6B7280;">
+                        Loading patient data...
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- JS FILE -->
+    <script src="../js/patient-status-panel.js"></script>
+
+</body>
+
+</html>

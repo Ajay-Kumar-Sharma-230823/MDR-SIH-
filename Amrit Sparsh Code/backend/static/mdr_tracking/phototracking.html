@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amrit Sparsh — MDR Tracking</title>
+
+  <!-- Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="Photo_tracking.css" />
+</head>
+<body class="h-full">
+  <div class="dashboard-wrapper">
+    <!-- ================= HEADER ================= -->
+    <header class="header" role="banner">
+      <div class="header-content">
+        <div class="brand-section">
+          <div class="logo-glow" role="img" aria-label="Amrit Sparsh Logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z" />
+              <path d="M9 12l2 2 4-4" />
+            </svg>
+          </div>
+          <div class="brand-text">
+            <h1 class="brand-title" id="appTitle">Amrit Sparsh</h1>
+            <div class="brand-subtitle" id="subtitle">MDR TRACKING</div>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="notification-btn" aria-label="Notifications" tabindex="0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="sync-status">
+            <span class="sync-dot"></span>
+            <span id="syncStatusLabel">Last synced:</span>
+            <strong id="syncTime">00:00:12 ago</strong>
+          </div>
+          <div class="user-avatar" tabindex="0" role="button" aria-label="User Profile">DR</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================ MAIN CONTENT ================ -->
+    <main class="main-content" role="main">
+      <!-- ========= Upload Section ========= -->
+      <section class="upload-section" aria-label="Upload Section">
+        <div class="upload-grid">
+          <!-- Patient Image Upload -->
+          <article class="upload-card">
+            <div class="card-header">
+              <h2 class="card-title" id="photoCardTitle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <path d="M21 15l-5-5L5 21" />
+                </svg>
+                Patient Image Upload
+              </h2>
+              <p class="card-description" id="photoCardDescription">
+                Upload MDR positive patient's face image (e.g., Radhika)
+              </p>
+            </div>
+            <div class="upload-zone" role="region" aria-label="Photo upload zone" tabindex="0" id="photoZone">
+              <div class="upload-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="17 8 12 3 7 8" />
+                  <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+              </div>
+              <div class="upload-label">Drag & Drop or Click to Upload</div>
+              <div class="upload-hint">Supported: JPG, PNG, TIFF (Max 10MB)</div>
+            </div>
+            <input id="photoInput" type="file" accept=".jpg,.jpeg,.png,.tif,.tiff" style="display:none" aria-hidden="true" />
+            <div class="upload-progress" id="photoProgress">
+              <div class="upload-progress-bar" style="width: 0%"></div>
+            </div>
+
+            <!-- Optional small preview of uploaded image -->
+            <div class="image-preview" id="imagePreview" hidden>
+              <span class="image-preview-label">Uploaded MDR+ Patient:</span>
+              <img id="previewImg" alt="Patient preview" />
+            </div>
+          </article>
+        </div>
+
+        <div class="process-btn-container">
+          <button class="process-btn" id="processBtn" aria-label="Process uploads" disabled>
+            <span id="processBtnText">Process Uploads</span>
+            <span class="spinner"></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ========= Analysis Section: Video + Graph TOGETHER ========= -->
+      <section class="analysis-section" id="analysisSection" aria-label="MDR Exposure Analysis" hidden>
+        <article class="analysis-layout">
+          <!-- Left: Video Evidence -->
+          <div class="analysis-video-card">
+            <div class="card-header">
+              <h2 class="card-title">
+                Handshake Evidence — Radhika → Ujala
+              </h2>
+              <p class="card-description">
+                Captured ward CCTV clip where MDR+ patient Radhika and Ujala are in direct handshake contact.
+              </p>
+            </div>
+            <div class="analysis-video-wrapper">
+              <!-- IMPORTANT: put your video file in same folder and update the src below -->
+              <video
+                id="evidenceVideo"
+                controls
+                playsinline
+                muted
+              >
+                <source src="mdr_handshake.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="analysis-note">
+              In the real backend, AI watches this video, detects faces frame by frame,
+              and logs the exact moment when Radhika's face and Ujala's face are seen
+              together in a handshake — marking it as a high-risk MDR exposure.
+            </p>
+          </div>
+
+          <!-- Right: Graph -->
+          <div class="graph-container">
+            <div class="graph-header">
+              <h2 class="graph-title" id="graphTitle">
+                <span>Exposure Chain — Detected Contacts</span>
+                <span class="live-badge">
+                  <span class="live-dot"></span> Live
+                </span>
+              </h2>
+              <div class="graph-meta">Total contacts: <strong id="totalContacts">3</strong></div>
+            </div>
+            <div class="graph-canvas" role="img" aria-label="Network visualization of MDR exposure chains">
+              <svg class="graph-svg" id="graphSvg"></svg>
+            </div>
+            <div class="node-detail-card" id="nodeDetail" role="dialog" aria-hidden="true">
+              <div class="detail-header">
+                <h3 class="detail-title" id="detailTitle">Patient Details</h3>
+                <button class="detail-close" id="detailClose" aria-label="Close details">×</button>
+              </div>
+              <div id="detailContent"></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Sidebar below video+graph -->
+        <aside class="sidebar" aria-label="Risk Statistics and Alerts">
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7" />
+                <rect x="14" y="3" width="7" height="7" />
+                <rect x="14" y="14" width="7" height="7" />
+                <rect x="3" y="14" width="7" height="7" />
+              </svg>
+              Risk Summary
+            </h3>
+            <div class="risk-summary-grid">
+              <div class="risk-stat high">
+                <span class="stat-label">High Risk</span>
+                <span class="stat-value high">1</span>
+              </div>
+              <div class="risk-stat medium">
+                <span class="stat-label">Medium Risk</span>
+                <span class="stat-value medium">1</span>
+              </div>
+              <div class="risk-stat low">
+                <span class="stat-label">Low Risk</span>
+                <span class="stat-value low">1</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card critical">
+            <h3 class="sidebar-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+              Critical Alerts
+            </h3>
+            <div class="alert-item">
+              <div class="alert-title">Patient R-101 — MDR+ Confirmed</div>
+              <div class="alert-text">Handshake contact with Ujala logged from CCTV analysis.</div>
+              <div class="alert-time">3 minutes ago</div>
+            </div>
+            <div class="alert-item">
+              <div class="alert-title">Contact Chain Update</div>
+              <div class="alert-text">Radhika, an MDR-positive patient, has been in direct contact with another individual.</div>
+              <div class="alert-time">12 minutes ago</div>
+            </div>
+          </div>
+
+
+        </aside>
+      </section>
+    </main>
+
+    <!-- ================ FOOTER ================ -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-content">
+        <div class="footer-meta">
+          <span class="sync-dot"></span>
+          <span id="syncStatusLabelFooter">Last synced</span>
+          <strong id="syncTimeFooter">00:00:12 ago</strong>
+          <span>—</span>
+          <span id="alertsLabel">alerts delivered</span>:
+          <strong>3</strong>
+        </div>
+        <div class="status-indicator">
+          <span class="status-dot"></span>
+          <span>System Operational</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast success" id="toast" role="alert" aria-live="polite" aria-atomic="true">
+      <div class="toast-content">
+        <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M9 12l2 2 4-4" />
+        </svg>
+        <div class="toast-body">
+          <div class="toast-title" id="toastTitle">Processing Complete</div>
+          <div class="toast-message" id="toastMessage">MDR analysis completed successfully. Network updated.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main script -->
+  <script src="photo-tracking.js"></script>
+</body>
+</html>

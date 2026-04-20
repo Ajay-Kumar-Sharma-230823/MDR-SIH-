@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Amrit Sparsh – MDR Contact Tracking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- HEADER -->
+    <header class="hero">
+      <h1 class="hero__title">Amrit Sparsh</h1>
+      <p class="hero__subtitle">MDR Contact Tracking using CCTV & AI</p>
+    </header>
+
+    <main class="content">
+
+      <!-- STEP 1: Upload -->
+      <section class="card">
+        <div class="card__header">
+          <span class="step-badge">STEP 1</span>
+          <h2 class="card__title">Upload Original CCTV Video</h2>
+        </div>
+
+        <label id="uploadArea" class="upload-box">
+          <input type="file" id="videoInput" accept="video/*" hidden>
+          <div class="upload-box__inner">
+            <div class="upload-box__icon">
+              <div class="camera-body"></div>
+              <div class="camera-lens"></div>
+            </div>
+            <div>
+              <p class="upload-box__title">Click to upload CCTV video</p>
+              <p class="upload-box__subtitle">MP4, AVI, MKV</p>
+            </div>
+          </div>
+        </label>
+
+        <p id="uploadStatus" class="status-text">No file selected yet.</p>
+      </section>
+
+      <!-- STEP 2: Original Video Preview -->
+      <section id="originalSection" class="card card--hidden">
+        <div class="card__header">
+          <span class="step-badge">STEP 2</span>
+          <h2 class="card__title">Original CCTV Preview</h2>
+        </div>
+
+        <div class="video-frame">
+          <video id="originalVideo" controls class="video-frame__video"></video>
+        </div>
+      </section>
+
+      <!-- STEP 3: Processed Video -->
+      <section class="card">
+        <div class="card__header">
+          <span class="step-badge">STEP 3</span>
+          <h2 class="card__title">Run MDR Analysis</h2>
+        </div>
+
+        <button id="analyzeBtn" class="primary-btn">▶️ Run Analysis</button>
+
+        <div id="analysisLoader" class="loader loader--hidden">
+          <div class="loader__spinner"></div>
+          <p class="loader__text">Analyzing video…</p>
+        </div>
+
+        <div id="processedSection" class="video-frame video-frame--processed video-frame--hidden">
+          <div class="video-frame__label">ML Processed Video (People Marked)</div>
+
+          <video
+            id="processedVideo"
+            class="video-frame__video"
+            controls
+            data-processed-src="processed_mdr_demo.mp4">
+          </video>
+        </div>
+
+        <p id="analysisStatus" class="status-text">Waiting for analysis…</p>
+      </section>
+
+      <!-- STEP 4: Simple Summary -->
+      <section class="card">
+        <div class="card__header">
+          <span class="step-badge">STEP 4</span>
+          <h2 class="card__title">MDR Contact Summary</h2>
+        </div>
+
+        <div class="summary-row">
+
+          <div class="summary-card summary-card--red">
+            <h3 class="summary-card__title">MDR Patient</h3>
+            <p id="mdrPatientName" class="summary-card__value">—</p>
+            <p class="summary-card__desc">MDR Positive</p>
+          </div>
+
+          <div class="summary-card summary-card--yellow">
+            <h3 class="summary-card__title">Close Contact</h3>
+            <p id="closeContactsNames" class="summary-card__value">—</p>
+            <p class="summary-card__desc">Was in close contact</p>
+          </div>
+
+          <div class="summary-card summary-card--blue">
+            <h3 class="summary-card__title">Away Contact</h3>
+            <p id="moderateContactsNames" class="summary-card__value">—</p>
+            <p class="summary-card__desc">Was farther away</p>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

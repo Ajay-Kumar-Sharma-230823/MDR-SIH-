@@ -1,0 +1,58 @@
+/* Custom font stack */
+.nav-font {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Hover effects */
+.nav-item:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+/* Focus outline for accessibility */
+.nav-focus:focus-visible {
+  outline: 2px solid #0A84FF;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Optional layout helpers when not using Tailwind */
+#navbar {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* Wave Animation */
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.wave-animation {
+  display: inline-block;
+  animation: wave 2.5s infinite;
+  transform-origin: 70% 70%;
+}
+
+/* Greeting Styles */
+.greeting-container {
+  font-family: 'Inter', sans-serif;
+}
+
+.greeting-light {
+  color: #64748b;
+  font-weight: 700; /* Bold */
+  margin-right: 5px;
+  letter-spacing: 0.5px;
+}
+
+.greeting-bold {
+  color: #1e293b; /* Darker slate */
+  font-weight: 900; /* Extra Bold */
+  letter-spacing: 0.5px;
+}

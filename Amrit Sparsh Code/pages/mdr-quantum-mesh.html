@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDR QuantumMesh - National Command Center</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/mdr-quantum-mesh.css">
+</head>
+
+<body>
+
+    <!-- 1. MASTER HEADER -->
+    <header class="master-header">
+        <div class="header-brand">
+            <img src="../img/amrit_sparsh_logo.png" alt="Amrit Sparsh" height="45">
+            <div class="header-title">MDR QuantumMesh <span style="font-weight: 300; opacity: 0.7;">Command
+                    Center</span></div>
+        </div>
+
+        <div class="header-controls">
+            <div class="live-sync-badge">
+                <div class="sync-dot"></div> LIVE NETWORK SYNC
+            </div>
+
+            <select style="padding: 8px; border-radius: 8px; border: 1px solid #e2e8f0; font-family: 'Inter';">
+                <option>District: Central Delhi</option>
+                <option>District: South Delhi</option>
+                <option>District: Gurugram</option>
+            </select>
+
+            <div style="position: relative;">
+                <i class="fas fa-bell" style="font-size: 1.2rem; color: #64748b; cursor: pointer;"></i>
+                <span
+                    style="position: absolute; top: -5px; right: -5px; background: #ef4444; width: 8px; height: 8px; border-radius: 50%;"></span>
+            </div>
+
+            <img src="../img/user.jpg" alt="Profile"
+                style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        </div>
+    </header>
+
+    <!-- 2. REAL-TIME STATUS BANNER -->
+    <div class="status-banner">
+        <div class="status-card">
+            <div class="status-label">Total Hospitals</div>
+            <div class="status-value">42</div>
+            <div class="status-trend text-success"><i class="fas fa-arrow-up"></i> 2 Connected Today</div>
+        </div>
+        <div class="status-card warning">
+            <div class="status-label">Active MDR Cases</div>
+            <div class="status-value">1,284</div>
+            <div class="status-trend text-warning"><i class="fas fa-exclamation-triangle"></i> 12 New Alerts</div>
+        </div>
+        <div class="status-card critical">
+            <div class="status-label">Critical Risk Hospitals</div>
+            <div class="status-value" style="color: var(--danger);">5</div>
+            <div class="status-trend text-danger">Requires Immediate Action</div>
+        </div>
+        <div class="status-card">
+            <div class="status-label">Transfers Today</div>
+            <div class="status-value">18</div>
+            <div class="status-trend text-neon"><i class="fas fa-robot"></i> 8 AI-Redirected</div>
+        </div>
+        <div class="status-card critical">
+            <div class="status-label">Outbreak Zones</div>
+            <div class="status-value" style="color: var(--danger);">2</div>
+            <div class="status-trend">Zone A, Zone C</div>
+        </div>
+    </div>
+
+    <!-- 3. MAIN INTERACTIVE LAYOUT -->
+    <div class="main-layout">
+
+        <!-- 4. LEFT PANEL - HOSPITAL LIST -->
+        <aside class="sidebar-panel">
+            <div class="sidebar-header">
+                Network Hospitals (42)
+                <i class="fas fa-filter" style="float: right; color: #94a3b8; cursor: pointer;"></i>
+            </div>
+            <div id="hospitalList" style="flex: 1; overflow-y: auto;">
+                <!-- Populated by JS -->
+                <div style="padding: 20px; text-align: center; color: #94a3b8;">Loading network data...</div>
+            </div>
+        </aside>
+
+        <!-- 3. MAIN MAP AREA -->
+        <main class="map-container" id="networkMap">
+            <div class="map-grid"></div>
+
+            <!-- Map Controls -->
+            <div
+                style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.9); padding: 15px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); z-index: 50;">
+                <div
+                    style="margin-bottom: 10px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; color: #64748b;">
+                    Map Layers</div>
+                <label style="display: block; margin-bottom: 5px; font-size: 0.9rem;">
+                    <input type="checkbox" checked> Show Outbreaks
+                </label>
+                <label style="display: block; margin-bottom: 5px; font-size: 0.9rem;">
+                    <input type="checkbox" checked> Live Transfers
+                </label>
+                <label style="display: block; font-size: 0.9rem;">
+                    <input type="checkbox" checked> AI Recommendations
+                </label>
+            </div>
+
+            <!-- Legend -->
+            <div
+                style="position: absolute; bottom: 20px; left: 20px; background: rgba(255,255,255,0.9); padding: 10px 15px; border-radius: 30px; display: flex; gap: 15px; font-size: 0.8rem; font-weight: 600; z-index: 50;">
+                <div style="display: flex; align-items: center; gap: 5px;"><span
+                        style="width: 8px; height: 8px; background: var(--success); border-radius: 50%;"></span> Low
+                    Risk</div>
+                <div style="display: flex; align-items: center; gap: 5px;"><span
+                        style="width: 8px; height: 8px; background: var(--warning); border-radius: 50%;"></span> Med
+                    Risk</div>
+                <div style="display: flex; align-items: center; gap: 5px;"><span
+                        style="width: 8px; height: 8px; background: var(--danger); border-radius: 50%;"></span> High
+                    Risk</div>
+            </div>
+
+            <!-- Nodes will be injected by JS -->
+        </main>
+
+        <!-- 12. LIVE ALERTS FEED -->
+        <aside class="alerts-panel">
+            <div class="sidebar-header" style="background: #fff; border-bottom: 2px solid #f1f5f9;">
+                <i class="fas fa-bolt" style="color: var(--warning); margin-right: 8px;"></i> Live Network Alerts
+            </div>
+            <div id="alertsFeed" style="flex: 1; overflow-y: auto;">
+                <!-- Populated by JS -->
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- 13. BOTTOM SECTION -->
+    <footer
+        style="padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; color: #64748b; font-size: 0.9rem;">
+        <div>Amrit Sparsh — Digital Health. Real Impact.</div>
+        <div style="display: flex; gap: 10px;">
+            <button
+                style="padding: 8px 16px; border: 1px solid #cbd5e1; background: white; border-radius: 6px; cursor: pointer;">Export
+                PDF</button>
+            <button
+                style="padding: 8px 16px; border: 1px solid #cbd5e1; background: white; border-radius: 6px; cursor: pointer;">Export
+                CSV</button>
+        </div>
+    </footer>
+
+    <!-- 5. HOSPITAL COMMAND CARD (MODAL) -->
+    <div class="modal-backdrop" id="commandModal">
+        <div class="command-card">
+            <div class="cc-header">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div
+                        style="width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-hospital" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <div>
+                        <h2 style="margin: 0; font-size: 1.2rem;" id="modalHospitalName">City General Hospital</h2>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">ID: HOSP-001 • Govt. Facility</div>
+                    </div>
+                </div>
+                <button id="closeModalBtn"
+                    style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            </div>
+
+            <div class="cc-tabs">
+                <div class="cc-tab active" data-tab="analytics">MDR Analytics</div>
+                <div class="cc-tab" data-tab="load">Load Balancing & Redirection</div>
+            </div>
+
+            <div class="cc-content" style="flex: 1; overflow-y: auto; padding: 30px; background: #f8fafc;">
+
+                <!-- TAB: ANALYTICS -->
+                <div id="tab-analytics">
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px;">
+                        <div
+                            style="background: white; padding: 20px; border-radius: 12px; box-shadow: var(--shadow-sm); text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--primary-blue);">142</div>
+                            <div style="font-size: 0.8rem; color: #64748b; font-weight: 600;">TOTAL MDR CASES</div>
+                        </div>
+                        <div
+                            style="background: white; padding: 20px; border-radius: 12px; box-shadow: var(--shadow-sm); text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--danger);">+8</div>
+                            <div style="font-size: 0.8rem; color: #64748b; font-weight: 600;">NEW TODAY</div>
+                        </div>
+                        <div
+                            style="grid-column: span 2; background: #fef2f2; padding: 20px; border-radius: 12px; border: 1px solid #fecaca; display: flex; align-items: center; gap: 15px;">
+                            <div
+                                style="width: 40px; height: 40px; background: #fee2e2; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--danger);">
+                                <i class="fas fa-biohazard"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; color: #991b1b;">Outbreak Alert Detected</div>
+                                <div style="font-size: 0.9rem; color: #b91c1c;">Cluster in ICU-Wing B. 3 patients with
+                                    NDM-1 strain.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="font-size: 1rem; margin-bottom: 15px;">Ward-Level Heatmap</h3>
+                    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: var(--shadow-sm);">
+                        <div style="display: flex; margin-bottom: 10px;">
+                            <div
+                                style="width: 40%; background: var(--danger); height: 30px; border-top-left-radius: 6px; border-bottom-left-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem; font-weight: 600;">
+                                ICU (40%)</div>
+                            <div
+                                style="width: 30%; background: var(--warning); height: 30px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem; font-weight: 600;">
+                                General (30%)</div>
+                            <div
+                                style="width: 30%; background: var(--success); height: 30px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem; font-weight: 600;">
+                                Isolation (30%)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: LOAD BALANCING -->
+                <div id="tab-load" style="display: none;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                        <div>
+                            <h3 style="font-size: 1rem; margin-bottom: 15px;">Current Capacity Status</h3>
+
+                            <div style="margin-bottom: 15px;">
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9rem;">
+                                    <span>ICU Beds</span>
+                                    <span style="font-weight: 700; color: var(--danger);">98% Full</span>
+                                </div>
+                                <div style="height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 98%; height: 100%; background: var(--danger);"></div>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 15px;">
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9rem;">
+                                    <span>Isolation Beds</span>
+                                    <span style="font-weight: 700; color: var(--warning);">85% Full</span>
+                                </div>
+                                <div style="height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 85%; height: 100%; background: var(--warning);"></div>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 15px;">
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9rem;">
+                                    <span>General Ward</span>
+                                    <span style="font-weight: 700; color: var(--success);">45% Full</span>
+                                </div>
+                                <div style="height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 45%; height: 100%; background: var(--success);"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 style="font-size: 1rem; margin-bottom: 15px;">AI Redirection Suggestion</h3>
+                            <div class="ai-rec-card">
+                                <div class="ai-badge">AI OPTIMIZED</div>
+                                <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 5px;">Redirect
+                                    Incoming to: Apollo Spectra</div>
+                                <div style="font-size: 0.9rem; color: #64748b; margin-bottom: 10px;">Distance: 4.2 km •
+                                    Availability: High</div>
+                                <button
+                                    style="width: 100%; background: var(--primary-blue); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 600; cursor: pointer;">Initiate
+                                    Transfer Protocol</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/mdr-quantum-mesh.js"></script>
+</body>
+
+</html>

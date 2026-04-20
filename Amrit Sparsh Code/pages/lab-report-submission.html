@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LabSync – Auto-Fetched Laboratory Report Viewer - Amrit Sparsh</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Segoe+UI:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS (unchanged) -->
+    <link rel="stylesheet" href="../css/lab-report.css">
+</head>
+
+<body>
+
+    <!-- Page Header -->
+    <header class="page-header sticky-top">
+        <div class="container" style="max-width: 1200px;">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <img src="../img/amrit_sparsh_logo.png" alt="Amrit Sparsh Logo"
+                        style="height: 45px; margin-right: 15px; background: white; padding: 5px; border-radius: 4px;">
+                    <div>
+                        <h1 class="page-title">LabSync – Laboratory Data Sync Panel</h1>
+                        <p class="page-subtitle mb-0">Seamlessly syncs patient lab data directly from the hospital
+                            laboratory.</p>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column align-items-end">
+                    <button class="btn btn-refresh" id="refreshBtn">
+                        <i class="fas fa-sync-alt"></i> Refresh Lab Sync
+                    </button>
+                    <span class="sync-status mt-2"><i class="far fa-clock"></i> Last Sync: <span
+                            id="lastSyncTime">--</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- PATIENT SEARCH BAR (Dynamic) - placed under header brand -->
+        <div class="container mt-4" style="max-width: 1200px;">
+            <div class="input-group mb-4">
+                <span class="input-group-text bg-primary text-white fw-bold">
+                    <i class="fas fa-search"></i> Search Patient
+                </span>
+                <input type="text" id="patientSearchInput" class="form-control" placeholder="Search by name, ward, UHID, phone..." autocomplete="off">
+            </div>
+
+            <!-- Search Results Dropdown -->
+            <ul id="patientSearchResults" class="list-group" style="display:none; position:absolute; z-index:1000; width:95%; max-width:1200px;">
+                <!-- JS will populate -->
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container pb-5" style="max-width: 1200px;">
+
+        <!-- Section 1: Auto-Synced Patient Summary -->
+        <section class="lab-card mb-4">
+            <div class="lab-card-header">
+                <h5 class="lab-card-title"><i class="fas fa-user-injured text-primary"></i> Patient Summary</h5>
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-2">
+                    <i class="fas fa-check-circle me-2"></i>Synced from Hospital Lab System
+                </span>
+            </div>
+            <div class="lab-card-body">
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="data-block">
+                            <span class="data-label"><i class="fas fa-user"></i> Patient Name</span>
+                            <span id="ps_name" class="data-value fw-bold" style="font-size: 1.1rem;">--</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="data-block">
+                            <span class="data-label"><i class="fas fa-venus-mars"></i> Age / Gender</span>
+                            <span id="ps_age_gender" class="data-value">--</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="data-block">
+                            <span class="data-label"><i class="fas fa-id-card"></i> Hospital ID</span>
+                            <span id="ps_uhid" class="data-value">--</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="data-block">
+                            <span class="data-label"><i class="fas fa-procedures"></i> Ward / Bed</span>
+                            <span id="ps_ward_bed" class="data-value">--</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="data-block">
+                            <span class="data-label"><i class="fas fa-user-md"></i> Assigned Doctor</span>
+                            <span id="ps_doctor" class="data-value">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Laboratory Report Overview -->
+        <section class="lab-card mb-4">
+            <div class="lab-card-header" style="background-color: #e7f1ff;">
+                <div class="d-flex align-items-center w-100 justify-content-between">
+                    <div>
+                        <h5 class="lab-card-title"><i class="fas fa-flask text-primary"></i> Laboratory Report Overview</h5>
+                        <span class="text-muted small fw-bold">LIMS INTEGRATED</span>
+                    </div>
+
+                    <!-- Upload Button (opens modal) -->
+                    <div>
+                        <button id="uploadLabBtn" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#uploadLabModal">
+                            <i class="fas fa-upload me-1"></i> Upload Lab Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lab-card-body">
+                <div class="row g-4">
+                    <div class="col-md-2">
+                        <div class="data-block">
+                            <span class="data-label">Sample Type</span>
+                            <span id="ov_sample_type" class="data-value highlight-blue">-- <span class="synced-badge"><i class="fas fa-check"></i></span></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="data-block">
+                            <span class="data-label">Sample ID</span>
+                            <span id="ov_sample_id" class="data-value">-- <span class="synced-badge"><i class="fas fa-check"></i></span></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="data-block">
+                            <span class="data-label">Lab Report Date</span>
+                            <span id="ov_report_date" class="data-value">-- <span class="synced-badge"><i class="fas fa-check"></i></span></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="data-block">
+                            <span class="data-label">Collection Date & Time</span>
+                            <span id="ov_collection_dt" class="data-value">-- <span class="synced-badge"><i class="fas fa-check"></i></span></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="data-block">
+                            <span class="data-label">Processing Date & Time</span>
+                            <span id="ov_processing_dt" class="data-value">-- <span class="synced-badge"><i class="fas fa-check"></i></span></span>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="alert alert-primary d-flex align-items-center mb-0 py-2 border-0" style="background-color: #cfe2ff; color: #084298;">
+                            <i class="fas fa-stopwatch me-2"></i>
+                            <span class="small fw-bold me-2">Time to Processing:</span>
+                            <span id="ov_time_to_processing" class="fw-bold">--</span>
+                            <span class="badge bg-white text-primary ms-2 border" style="font-size: 0.7rem;">Auto-calculated</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="row g-4">
+            <!-- Section 3: Culture & Organism Details -->
+            <div class="col-lg-6">
+                <section class="lab-card h-100">
+                    <div class="lab-card-header">
+                        <h5 class="lab-card-title"><i class="fas fa-bacterium text-primary"></i> Culture & Organism Details</h5>
+                    </div>
+                    <div class="lab-card-body">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="data-block">
+                                    <span class="data-label">Organism Detected</span>
+                                    <span id="org_organism" class="data-value text-danger fw-bold" style="font-size: 1.05rem;">--</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="data-block">
+                                    <span class="data-label">Gram Stain</span>
+                                    <span id="org_gram" class="data-value">--</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="data-block">
+                                    <span class="data-label">Growth Pattern</span>
+                                    <span id="org_growth" class="data-value">--</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="data-block">
+                                    <span class="data-label">Infection Site</span>
+                                    <span id="org_site" class="data-value">--</span>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="data-block">
+                                    <span class="data-label">Infection Source</span>
+                                    <span id="org_source" class="data-value">--</span>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="p-3 rounded border" style="background-color: #f8fafc;">
+                                    <span class="data-label mb-2"><i class="fas fa-sticky-note"></i> Lab Notes</span>
+                                    <p id="org_notes" class="mb-0 text-dark small">--</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Section 5: Resistance Gene Markers -->
+            <div class="col-lg-6">
+                <section class="lab-card h-100">
+                    <div class="lab-card-header">
+                        <h5 class="lab-card-title"><i class="fas fa-dna text-primary"></i> Resistance Gene Markers</h5>
+                    </div>
+                    <div class="lab-card-body">
+                        <div class="mb-4">
+                            <span class="data-label mb-2">ESBL Markers</span>
+                            <div id="gm_esbl">
+                                <!-- JS will add gene chips here -->
+                                <span class="text-muted small">--</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <span class="data-label mb-2">Carbapenemase Markers</span>
+                            <div id="gm_carb">
+                                <span class="text-muted small">--</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <span class="data-label mb-2">VRE Markers</span>
+                            <div id="gm_vre">
+                                <span class="text-muted small">--</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <span class="data-label">MRSA (mecA)</span>
+                            <span id="gm_mrsa" class="data-value">--</span>
+                        </div>
+
+                        <div class="p-3 rounded border" style="background-color: #f8fafc;">
+                            <span class="data-label mb-2">Genetic Notes</span>
+                            <p id="gm_notes" class="mb-0 text-dark small">--</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Section 4: AST Results Table -->
+        <section class="lab-card mt-4">
+            <div class="lab-card-header">
+                <h5 class="lab-card-title"><i class="fas fa-table text-primary"></i> AST Results Table</h5>
+                <span class="badge bg-light text-dark border fw-normal ms-2" style="font-size: 0.75rem;">Automated VITEK-2 Import</span>
+            </div>
+
+            <div class="lab-card-body p-0">
+                <div class="table-responsive">
+                    <table id="ast_table" class="read-only-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 35%;">Antibiotic</th>
+                                <th style="width: 20%;">Result</th>
+                                <th style="width: 15%;">MIC</th>
+                                <th style="width: 15%;">Zone (mm)</th>
+                                <th style="width: 15%;">Source</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ast_table_body">
+                            <!-- JS will build rows here -->
+                            <tr><td colspan="5" class="text-center text-muted">No AST data available</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <div class="row mt-4 g-4">
+            <!-- Section 6: Auto-Computed MDR Risk Assessment -->
+            <div class="col-lg-8">
+                <section class="lab-card h-100">
+                    <div class="lab-card-header">
+                        <h5 class="lab-card-title"><i class="fas fa-shield-virus text-primary"></i> Auto-Computed MDR Risk Assessment</h5>
+                        <span class="text-muted small"><i class="fas fa-robot me-1"></i>Auto-assessed from laboratory findings</span>
+                    </div>
+
+                    <div class="lab-card-body">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="data-block">
+                                    <span class="data-label">Severity Level</span>
+                                    <div id="risk_severity" class="risk-value-display text-danger">--</div>
+                                    <span id="risk_action_badge" class="badge bg-danger-subtle text-danger border border-danger-subtle">--</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="data-block">
+                                    <span class="data-label">MDR Status</span>
+                                    <div id="risk_mdr_status" class="risk-value-display text-danger">--</div>
+                                    <span class="text-muted small" id="risk_mdr_text">--</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="data-block">
+                                    <span class="data-label">Spread Risk Score</span>
+                                    <div id="risk_score" class="risk-value-display text-warning">--</div>
+                                    <div class="risk-meter-container">
+                                        <div class="risk-segment low" id="risk_seg_low"></div>
+                                        <div class="risk-segment medium" id="risk_seg_med"></div>
+                                        <div class="risk-segment high" id="risk_seg_high"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-1">
+                                        <span class="small text-muted">Low</span>
+                                        <span class="small text-muted">High</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="data-block border-bottom pb-2">
+                                    <span class="data-label">Antibiotic Failure Probability</span>
+                                    <span id="risk_failure_prob" class="data-value text-danger fw-bold">--</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="data-block border-bottom pb-2">
+                                    <span class="data-label">Predicted Cluster</span>
+                                    <span id="risk_cluster" class="data-value">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Section 7: Synced Lab Documents -->
+            <div class="col-lg-4">
+                <section class="lab-card h-100">
+                    <div class="lab-card-header">
+                        <h5 class="lab-card-title"><i class="fas fa-file-medical text-primary"></i> Synced Lab Documents</h5>
+                    </div>
+                    <div class="lab-card-body" id="docs_container">
+                        <!-- JS will populate file items here -->
+                        <div class="text-muted small">No documents available</div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Upload Modal (skeleton) -->
+    <div class="modal fade" id="uploadLabModal" tabindex="-1" aria-labelledby="uploadLabModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <form id="uploadLabForm" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="uploadLabModalLabel"><i class="fas fa-upload me-2"></i> Upload Lab Report</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Sample Type</label>
+                                <input type="text" id="form_sample_type" name="sample_type" class="form-control" placeholder="e.g. Blood Culture">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Sample ID</label>
+                                <input type="text" id="form_sample_id" name="sample_id" class="form-control" placeholder="e.g. LAB-2025-...">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Lab Report Date</label>
+                                <input type="date" id="form_report_date" name="lab_report_date" class="form-control">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Collection Date & Time</label>
+                                <input type="datetime-local" id="form_collection_dt" name="collection_datetime" class="form-control">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Processing Date & Time</label>
+                                <input type="datetime-local" id="form_processing_dt" name="processing_datetime" class="form-control">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Organism Detected</label>
+                                <input type="text" id="form_organism" name="organism_detected" class="form-control" placeholder="e.g. Klebsiella pneumoniae">
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Lab Notes</label>
+                                <textarea id="form_lab_notes" name="lab_notes" class="form-control" rows="2" placeholder="Optional notes"></textarea>
+                            </div>
+
+                            <div class="col-12">
+                                <hr>
+                                <h6>AST Results (manual entry or CSV import)</h6>
+
+                                <!-- AST input area (JS will enhance) -->
+                                <div id="ast_input_area" class="mb-3">
+                                    <small class="text-muted">You can add rows manually or import CSV (VITEK).</small>
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Antibiotic</th>
+                                                <th>Result (S/I/R)</th>
+                                                <th>MIC</th>
+                                                <th>Zone (mm)</th>
+                                                <th>Source</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="ast_input_body">
+                                            <!-- JS will add row templates here -->
+                                            <tr>
+                                                <td><input type="text" name="ast_antibiotic[]" class="form-control form-control-sm"></td>
+                                                <td><input type="text" name="ast_result[]" class="form-control form-control-sm"></td>
+                                                <td><input type="text" name="ast_mic[]" class="form-control form-control-sm"></td>
+                                                <td><input type="text" name="ast_zone[]" class="form-control form-control-sm"></td>
+                                                <td><input type="text" name="ast_source[]" class="form-control form-control-sm" value="Manual"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="d-flex gap-2">
+                                        <button type="button" id="addAstRowBtn" class="btn btn-sm btn-outline-secondary">+ Add row</button>
+                                        <button type="button" id="importAstCsvBtn" class="btn btn-sm btn-outline-primary">Import CSV</button>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <h6>Resistance Gene Markers</h6>
+                                <div class="row g-2 mb-2">
+                                    <div class="col-md-4">
+                                        <label class="form-label">ESBL Markers (comma-separated)</label>
+                                        <input type="text" id="form_esbl" name="esbl_markers" class="form-control" placeholder="CTX-M-15, TEM-1">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Carbapenemase Markers (comma-separated)</label>
+                                        <input type="text" id="form_carb" name="carbapenemase" class="form-control" placeholder="NDM-1, OXA-48">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">VRE Markers</label>
+                                        <input type="text" id="form_vre" name="vre_markers" class="form-control" placeholder="vanA, vanB">
+                                    </div>
+                                </div>
+
+                                <div class="row g-2">
+                                    <div class="col-md-4">
+                                        <label class="form-label">MRSA Marker</label>
+                                        <input type="text" id="form_mrsa" name="mrsa_marker" class="form-control" placeholder="mecA">
+                                    </div>
+
+                                    <div class="col-md-8">
+                                        <label class="form-label">Genetic Notes</label>
+                                        <input type="text" id="form_gnotes" name="genomic_notes" class="form-control" placeholder="Optional genetic notes">
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <div class="mb-3">
+                                    <label class="form-label">Attach report file (PDF / CSV)</label>
+                                    <input type="file" id="form_file" name="file" class="form-control">
+                                    <div class="form-text">Files will be stored locally on the server (backend/uploads/lab_reports).</div>
+                                </div>
+                            </div>
+
+                            <!-- Hidden patient id (populated by JS when patient is selected) -->
+                            <input type="hidden" id="form_patient_id" name="patient_id" value="">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button id="submitUploadBtn" type="button" class="btn btn-primary">Upload Report</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (unchanged) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS (your existing file) -->
+    <script src="../js/lab-report.js"></script>
+</body>
+
+</html>

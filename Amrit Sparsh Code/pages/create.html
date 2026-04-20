@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Amrit Sparsh</title>
+    <link rel="stylesheet" href="../css/create.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="split-screen">
+        <!-- LEFT PANEL -->
+        <div class="left-panel">
+            <div class="overlay"></div>
+            <div class="content">
+                <h1>Secure access for authorized doctors</h1>
+                <p>Create your account to access MDR monitoring & control</p>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="right-panel">
+            <div class="form-card">
+                <div class="form-header">
+                    <h2>Create Account</h2>
+                    <p>Enter your details to register</p>
+                </div>
+
+                <form id="createAccountForm">
+                    <!-- Personal Info -->
+                    <div class="form-section">
+                        <h3>Personal Info</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" id="fullName" placeholder="Dr. John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select id="gender" required>
+                                    <option value="" disabled selected>Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="dob">Date of Birth</label>
+                                <input type="date" id="dob" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profilePhoto">Profile Photo</label>
+                                <div class="file-upload">
+                                    <input type="file" id="profilePhoto" accept="image/*">
+                                    <div class="upload-preview" id="uploadPreview">
+                                        <span>+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="form-section">
+                        <h3>Contact Info</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="mobile">Mobile Number</label>
+                                <input type="tel" id="mobile" placeholder="9876543210" pattern="[0-9]{10}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" placeholder="doctor@hospital.com" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="form-section">
+                        <h3>Location</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <select id="city" required>
+                                    <option value="" disabled selected>Select City</option>
+                                    <option value="Bhopal">Bhopal</option>
+                                    <option value="Gwalior">Gwalior</option>
+                                    <option value="Mumbai">Mumbai</option>
+                                    <option value="Pune">Pune</option>
+                                    <option value="Nagpur">Nagpur</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="hospital">Hospital</label>
+                                <select id="hospital" disabled required>
+                                    <option value="" disabled selected>Select City First</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security -->
+                    <div class="form-section">
+                        <h3>Security</h3>
+                        <div class="form-group">
+                            <label for="password">Create Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="password" placeholder="Create a strong password" required
+                                    minlength="8">
+                                <span class="toggle-password" onclick="togglePassword()">👁️</span>
+                            </div>
+                            <p class="helper-text">Use at least 8 characters with a mix of letters, numbers, and
+                                symbols.</p>
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="btn-primary">Create Account — Access Dashboard</button>
+
+                    <div class="form-footer">
+                        <p>Already have an account? <a href="../index.html">Sign in</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/create.js"></script>
+</body>
+
+</html>

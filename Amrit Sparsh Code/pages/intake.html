@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Amrit Sparsh Visitor Intake</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f5f7fa; }
+        .card { max-width: 400px; margin: auto; padding: 20px; background: white; border-radius: 8px; }
+        input { width: 100%; padding: 12px; margin-top: 10px; border-radius: 6px; border: 1px solid #ccc; }
+        button { width: 100%; padding: 14px; background: #3b82f6; color: white; border: none; border-radius: 6px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Visitor Registration</h2>
+    <p>Please provide basic information.</p>
+
+    <input id="name" placeholder="Your Name">
+    <input id="phone" placeholder="Phone Number">
+
+    <button onclick="submitVisitor()">Submit</button>
+</div>
+
+<script>
+async function submitVisitor() {
+    const params = new URLSearchParams(window.location.search);
+    const hostId = params.get("host");   // host_unknown id created earlier
+
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+
+    if (!name || !phone) return alert("Fill all details");
+
+    // 1. Create Visitor Node
+    const res = await fetch("http://localhost:8000/graph-feature/add-unknown", {
+        method: "POST",
+        body: new URLSearchParams({ name, phone })
+    });
+
+    const data = await res.json();
+    const visitorNodeId = data.node_id;
+
+    // 2. Link host_unknown → visitor (transform host node into final visitor)
+    await fetch("http://localhost:8000/graph-feature/link-host-visitor", {
+        method: "POST",
+        body: new URLSearchParams({
+            host_id: hostId,
+            visitor_id: visitorNodeId
+        })
+    });
+
+    alert("Registered Successfully! You may close this page.");
+}
+</script>
+
+</body>
+</html>

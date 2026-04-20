@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+python-multipart
+python-jose
+passlib
+bcrypt
+joblib
+numpy
+scikit-learn
+requests

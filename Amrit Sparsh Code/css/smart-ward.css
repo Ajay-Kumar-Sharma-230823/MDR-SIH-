@@ -1,0 +1,217 @@
+body {
+    box-sizing: border-box;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 9999px;
+}
+
+.focus-ring:focus-visible {
+    outline: 2px solid #0ea5e9;
+    outline-offset: 2px;
+}
+
+/* Ward floor with realistic tiles */
+.ward-floor {
+    background:
+        linear-gradient(90deg, #e2e8f0 1px, transparent 1px),
+        linear-gradient(#e2e8f0 1px, transparent 1px),
+        linear-gradient(to bottom, #f8fafc, #f1f5f9);
+    background-size: 60px 60px, 60px 60px, 100% 100%;
+    position: relative;
+}
+
+/* Ceiling lights effect */
+.ceiling-light {
+    position: absolute;
+    width: 120px;
+    height: 80px;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Realistic bed styling */
+.hospital-bed {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.hospital-bed:hover {
+    transform: translateY(-2px);
+}
+
+.bed-frame {
+    background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+    border: 2px solid #9ca3af;
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        inset 0 1px 2px rgba(255, 255, 255, 0.5),
+        0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.bed-mattress {
+    background: linear-gradient(to bottom, #ffffff 0%, #f9fafb 50%, #f3f4f6 100%);
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.06),
+        0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.bed-pillow {
+    background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+    box-shadow:
+        inset 0 1px 2px rgba(0, 0, 0, 0.05),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.bed-rail {
+    background: linear-gradient(to right, #d1d5db, #e5e7eb, #d1d5db);
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.5),
+        0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.iv-stand {
+    background: linear-gradient(to bottom, #9ca3af, #6b7280);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.iv-bag {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 240, 255, 0.8));
+    box-shadow:
+        inset 0 1px 2px rgba(0, 0, 0, 0.1),
+        0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Privacy curtain */
+.curtain {
+    background: linear-gradient(90deg,
+            #dbeafe 0%,
+            #bfdbfe 10%,
+            #dbeafe 20%,
+            #bfdbfe 30%,
+            #dbeafe 40%,
+            #bfdbfe 50%,
+            #dbeafe 60%,
+            #bfdbfe 70%,
+            #dbeafe 80%,
+            #bfdbfe 90%,
+            #dbeafe 100%);
+    box-shadow:
+        inset 0 0 10px rgba(59, 130, 246, 0.1),
+        2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Risk glow effects */
+.glow-empty {
+    box-shadow: 0 0 20px rgba(203, 213, 225, 0.6), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.glow-low {
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.5), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.glow-medium {
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.5), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.glow-critical {
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.6), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.glow-mdr {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.6), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Bed status indicator */
+.status-indicator {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    z-index: 10;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+/* Selected bed highlight */
+.bed-selected {
+    transform: translateY(-4px);
+    z-index: 20;
+}
+
+.bed-selected .bed-frame {
+    border-color: #0ea5e9;
+    box-shadow:
+        0 0 0 3px rgba(14, 165, 233, 0.3),
+        0 8px 20px rgba(0, 0, 0, 0.15),
+        inset 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* Wall oxygen port */
+.oxygen-port {
+    background: radial-gradient(circle, #10b981 0%, #059669 100%);
+    box-shadow:
+        inset 0 1px 2px rgba(255, 255, 255, 0.3),
+        0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Bedside table */
+.bedside-table {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Info panel slide animation */
+.info-panel-enter {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Ward card hover effect */
+.ward-card {
+    transition: all 0.3s ease;
+}
+
+.ward-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}

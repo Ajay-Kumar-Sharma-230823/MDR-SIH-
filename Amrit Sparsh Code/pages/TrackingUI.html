@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Amrit Sparsh — MDR Tracking Console</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/TrackingUI.css">
+
+    <!-- D3 v7 -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- Backend-connected App logic -->
+    <script defer src="../js/Tracking.js"></script>
+</head>
+
+<body>
+<div class="app-shell">
+
+    <!-- HEADER -->
+    <header class="top-bar">
+        <div class="top-bar-left">
+            <div class="brand-badge">
+                <span class="brand-acronym">AS</span>
+            </div>
+            <div class="brand-text">
+                <h1>Amrit Sparsh — MDR Tracking</h1>
+                <p>Equipment usage + Ward exposure monitoring</p>
+            </div>
+        </div>
+
+        <div class="top-bar-right">
+            <div class="pill pill-live">
+                <span class="pill-dot"></span>
+                Connected to Backend
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <main class="main-layout">
+
+        <!-- LEFT: EQUIPMENT TRACKING -->
+        <section class="column column-left">
+
+            <header class="column-header">
+                <h2>Equipment Tracking</h2>
+                <p>
+                    Scan or assign equipment to MDR patients.  
+                    All activity is saved in the central backend.
+                </p>
+            </header>
+
+            <!-- EQUIPMENT LIST -->
+            <section class="card card-equipment">
+
+                <header class="card-header">
+                    <div>
+                        <h3>Equipment Register</h3>
+                        <p>Click an item to copy its ID + preview QR.</p>
+                    </div>
+                    <span class="tag tag-soft">QR Enabled</span>
+                </header>
+
+                <div id="equipmentList" class="equipment-list"></div>
+
+                <div id="selectedEquipmentBox" class="selected-equipment">
+                    <h4>Selected Equipment</h4>
+                    <p>Click an equipment on the left to view details.</p>
+                </div>
+            </section>
+
+            <!-- SIMULATED SCAN / LINK -->
+            <section class="card">
+                <header class="card-header">
+                    <div>
+                        <h3>Assign Equipment to Patient</h3>
+                        <p>Links equipment usage to patient history.</p>
+                    </div>
+                </header>
+
+                <form id="linkForm" class="form-grid">
+
+                    <div class="form-group">
+                        <label for="equipmentSelect">Equipment</label>
+                        <select id="equipmentSelect" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="patientInput">Patient ID</label>
+                        <input
+                            id="patientInput"
+                            type="text"
+                            placeholder="Example: P-101"
+                            autocomplete="off"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">LINK</button>
+                        <span id="linkStatus" class="hint-text"></span>
+                    </div>
+
+                </form>
+            </section>
+
+        </section>
+
+        <!-- RIGHT: WARD / EXPOSURE GRAPH -->
+        <section class="column column-right">
+
+            <header class="column-header">
+                <h2>Ward / Exposure Graph</h2>
+                <p>
+                    Interactive representation of movement, contacts,  
+                    and MDR exposure network inside the hospital.
+                </p>
+            </header>
+
+            <section class="graph-layout">
+
+                <!-- CONTROL PANEL -->
+                <aside class="card controls-card">
+
+                    <header class="card-header">
+                        <div>
+                            <h3>Graph Tools</h3>
+                            <p>Add nodes and connect interactions.</p>
+                        </div>
+                    </header>
+
+                    <!-- ADD NODE -->
+                    <form id="nodeForm" class="form-vertical">
+                        <h4>Add Node</h4>
+
+                        <div class="form-group">
+                            <label for="nodeLabelInput">Label</label>
+                            <input id="nodeLabelInput" type="text" placeholder="Nurse A, Bed 14, Ward 3" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nodeTypeSelect">Type</label>
+                            <select id="nodeTypeSelect">
+                                <option value="Patient">Patient</option>
+                                <option value="Staff">Staff</option>
+                                <option value="Equipment">Equipment</option>
+                                <option value="Visitor">Visitor</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nodeRiskSelect">Risk Level</label>
+                            <select id="nodeRiskSelect">
+                                <option value="">None</option>
+                                <option value="HIGH">High</option>
+                                <option value="MODERATE">Moderate</option>
+                                <option value="LOW">Low</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-secondary">Add Node</button>
+                    </form>
+
+                    <!-- ADD LINK -->
+                    <form id="linkGraphForm" class="form-vertical">
+                        <h4>Add Interaction</h4>
+
+                        <div class="form-group">
+                            <label for="linkSourceInput">Source ID</label>
+                            <input id="linkSourceInput" type="text" placeholder="Node ID" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="linkTargetInput">Target ID</label>
+                            <input id="linkTargetInput" type="text" placeholder="Node ID" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-outline">Add Link</button>
+                    </form>
+
+                    <div class="legend">
+                        <h4>Risk Legend</h4>
+                        <ul>
+                            <li><span class="legend-dot legend-high"></span> High</li>
+                            <li><span class="legend-dot legend-moderate"></span> Moderate</li>
+                            <li><span class="legend-dot legend-low"></span> Low</li>
+                            <li><span class="legend-dot legend-normal"></span> Normal</li>
+                        </ul>
+                    </div>
+
+                </aside>
+
+                <!-- GRAPH VIEW -->
+                <section class="card graph-card">
+
+                    <header class="card-header">
+                        <div>
+                            <h3>Exposure Network</h3>
+                            <p>Visual MDR exposure mapping</p>
+                        </div>
+                        <span class="tag tag-soft">D3 Interactive Graph</span>
+                    </header>
+
+                    <div class="graph-wrapper">
+                        <svg id="exposureSvg" aria-label="Ward exposure graph"></svg>
+                    </div>
+
+                    <div id="nodeDetailBox" class="node-detail">
+                        <h4>Node Details</h4>
+                        <p>Select a node in the graph to view details.</p>
+                    </div>
+
+                </section>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>
+            Amrit Sparsh — MDR Tracking System.  
+            All activity saved securely in backend.
+        </p>
+    </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediMind AI | Command Center</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/AI-chatbot.css">
+</head>
+<body>
+
+    <div class="bg-mesh"></div>
+
+    <div class="dashboard-container">
+        
+        <nav class="sidebar">
+            <a href="../home.html" class="brand-logo" title="Home">
+                <i class="fa-solid fa-notes-medical"></i>
+            </a>
+            
+            <div class="nav-links">
+                <a href="AI-chatbot.html" class="nav-item active" title="AI Assistant">
+                    <i class="fa-solid fa-robot"></i>
+                </a>
+                <a href="patient-dashboard.html" class="nav-item" title="Patients">
+                    <i class="fa-solid fa-bed-pulse"></i>
+                </a>
+                <a href="reports.html" class="nav-item" title="Reports">
+                    <i class="fa-solid fa-chart-pie"></i>
+                </a>
+                <a href="settings.html" class="nav-item" title="Settings">
+                    <i class="fa-solid fa-gear"></i>
+                </a>
+            </div>
+
+            <div class="user-avatar">AS</div>
+        </nav>
+
+        <main class="main-content">
+            <header class="glass-header">
+                <div class="header-text">
+                    <h1>MediMind AI</h1>
+                    <span class="status-pill">Online</span>
+                </div>
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search Patient ID...">
+                </div>
+            </header>
+
+            <div class="chat-workspace">
+                <div class="chat-scroll-area" id="chatHistory">
+                    <div class="time-stamp">TODAY, 10:23 AM</div>
+                    
+                    <div class="msg-row ai">
+                        <div class="avatar"><i class="fa-solid fa-robot"></i></div>
+                        <div class="msg-card">
+                            <div class="msg-top">
+                                <span>MediMind Core</span>
+                                <span class="badge warning">High Risk</span>
+                            </div>
+                            <p>Patient <strong>Rajesh Kumar (ID: 4456)</strong> in Ward 301-A has shown consistent fever spikes.</p>
+                            <div class="highlight-text">Possible VRSA resistance detected. Flagged for Infection Control.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-dock">
+                    <div class="suggestions">
+                        <button>Show Labs</button>
+                        <button>Isolation Protocol</button>
+                    </div>
+                    <div class="input-bar">
+                        <button class="action-btn"><i class="fa-solid fa-paperclip" style="color:#94A3B8"></i></button>
+                        <div class="input-wrapper">
+                            <input type="text" id="chatInput" placeholder="Type a clinical query..." autocomplete="off">
+                        </div>
+                        <button class="action-btn mic-btn"><i class="fa-solid fa-microphone"></i></button>
+                        <button class="action-btn send-btn" id="sendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="info-panel">
+            <div style="display: flex; justify-content: space-between;">
+                <h3 style="font-size:12px; color:#94A3B8; font-weight:700;">ACTIVE CONTEXT</h3>
+                <i class="fa-solid fa-ellipsis" style="color:#CBD5E1"></i>
+            </div>
+
+            <div class="patient-card">
+                <div class="pp-header">
+                    <div class="pp-info">
+                        <h2>Rajesh Kumar</h2>
+                        <span>Male, 62 Yrs</span>
+                    </div>
+                    <div class="risk-ring">88%</div>
+                </div>
+                <div class="pp-grid">
+                    <div class="stat"><label>Ward</label><span>ICU-B</span></div>
+                    <div class="stat"><label>Bed</label><span>04</span></div>
+                    <div class="stat"><label>ABHA</label><span>...0091</span></div>
+                </div>
+            </div>
+
+            <div style="font-size:12px; color:#94A3B8; font-weight:700; margin-top:10px;">RECOMMENDED ACTIONS</div>
+            
+            <div class="action-list">
+                <div class="action-item red">
+                    <div class="icon" style="color:#E11D48"><i class="fa-solid fa-shield-virus"></i></div>
+                    <div class="details">
+                        <h4>Isolate Patient</h4>
+                        <p>Contact Precautions</p>
+                    </div>
+                </div>
+                <div class="action-item blue">
+                    <div class="icon" style="color:#0284C7"><i class="fa-solid fa-pump-medical"></i></div>
+                    <div class="details">
+                        <h4>Sanitize Ward</h4>
+                        <p>Deep Clean Bed 04</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <script src="../js/AI-chatbot.js"></script>
+</body>
+</html>

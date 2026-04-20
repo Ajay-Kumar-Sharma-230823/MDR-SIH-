@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDR Patient Smart Search Panel - Amrit Sparsh</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/patient-TraceNet.css">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Navbar Start (Consistent with Patient Status Panel) -->
+  <nav
+    class="flex items-center justify-between px-10 h-[70px] bg-[#0066FF] shadow-lg sticky top-0 z-50 border-b border-blue-500">
+    <div class="flex items-center gap-3">
+      <img src="../img/amrit_sparsh_logo.png" alt="Amrit Sparsh Logo" class="h-10 w-auto brightness-200 contrast-200">
+      <span class="font-bold text-xl text-white tracking-tight">Amrit Sparsh</span>
+    </div>
+
+    <div class="flex items-center gap-8">
+      <a href="../index.html"
+        class="text-blue-100 font-medium text-sm uppercase tracking-wide hover:text-white transition-colors">Home</a>
+
+      <div class="relative group">
+        <a href="#"
+          class="flex items-center gap-1.5 text-blue-100 font-medium text-sm uppercase tracking-wide group-hover:text-white transition-colors">
+          Pages <i class="fas fa-chevron-down text-xs"></i>
+        </a>
+        <div
+          class="absolute top-full right-0 bg-white min-w-[220px] shadow-lg rounded-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-4 transition-all duration-200 border border-slate-200">
+          <a href="patient-intake.html"
+            class="block px-5 py-2.5 text-slate-700 text-sm font-medium hover:bg-slate-50 hover:text-[#006CFF]">1.
+            Patient Clinical Insights</a>
+          <a href="patient-status-panel.html"
+            class="block px-5 py-2.5 text-slate-700 text-sm font-medium hover:bg-slate-50 hover:text-[#006CFF]">2.
+            Patient Status Panel</a>
+          <a href="patient-TraceNet.html"
+            class="block px-5 py-2.5 text-slate-700 text-sm font-medium hover:bg-slate-50 hover:text-[#006CFF]">3. MDR
+            TraceNet</a>
+        </div>
+      </div>
+
+      <div class="relative group">
+        <a href="#"
+          class="flex items-center gap-1.5 text-blue-100 font-medium text-sm uppercase tracking-wide group-hover:text-white transition-colors">
+          👋 Hey Team <i class="fas fa-chevron-down text-xs"></i>
+        </a>
+        <div
+          class="absolute top-full right-0 bg-white min-w-[220px] shadow-lg rounded-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-4 transition-all duration-200 border border-slate-200">
+          <a href="my-profile.html"
+            class="block px-5 py-2.5 text-slate-700 text-sm font-medium hover:bg-slate-50 hover:text-[#006CFF]">My
+            Profile</a>
+          <a href="#"
+            class="block px-5 py-2.5 text-slate-700 text-sm font-medium hover:bg-slate-50 hover:text-[#006CFF]">Settings</a>
+          <a href="../index.html"
+            class="block px-5 py-2.5 text-slate-700 text-sm font-medium hover:bg-slate-50 hover:text-[#006CFF]">Logout</a>
+        </div>
+      </div>
+
+      <!-- Alert Option (Explicit Link) -->
+      <a href="#"
+        class="flex items-center gap-1.5 text-white font-bold text-sm uppercase tracking-wide hover:text-blue-100 transition-colors">
+        Alerts <i class="fas fa-bell"></i>
+        <span class="inline-block w-2 h-2 bg-red-400 rounded-full mb-2 shadow-sm"></span>
+      </a>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <div class="search-panel-wrapper">
+    <div class="search-container">
+      <!-- Header -->
+      <div class="panel-header">
+        <h1 class="system-title" id="system-title">MDR PATIENT TRACE TraceNet</h1>
+        <p class="system-subtitle">Privacy-protected search system for patient records</p>
+      </div>
+
+      <!-- Search Box -->
+      <div class="search-box-container">
+        <input type="text" class="search-box" id="search-input"
+          placeholder="Search Patient by Name, ABHA Number, or Doctor..." autocomplete="off">
+        <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <!-- Suggestions Dropdown -->
+        <div class="suggestions-dropdown" id="suggestions-dropdown">
+          <!-- Suggestions will be rendered here -->
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="empty-state">
+        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <p class="empty-message" id="empty-message">Search to view patient details...</p>
+      </div>
+
+      <!-- Patient List -->
+      <div class="patient-list" id="patient-list">
+        <!-- Patient cards will be rendered here -->
+      </div>
+      <!-- VISITOR CONTACTS PANEL (Hidden until patient selected) -->
+      <div id="visitor-section" class="mt-10 hidden">
+
+        <h2 class="text-2xl font-bold text-slate-800 mb-4">
+          Visitor Contacts
+        </h2>
+
+        <!-- Add Visitor Button -->
+
+
+        <!-- Visitor List -->
+        <div id="visitor-list" class="mt-6 space-y-4">
+          <!-- visitor cards inserted from JS -->
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <!-- ADD VISITOR MODAL -->
+  <div id="visitor-modal" style="display:none;" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+
+    <div class="bg-white w-[420px] p-6 rounded-xl shadow-xl">
+
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold">Add New Visitor</h2>
+        <button id="visitor-modal-close" class="text-2xl font-bold">&times;</button>
+      </div>
+
+      <div class="space-y-4">
+
+        <div>
+          <label class="text-sm font-semibold">Visitor Name</label>
+          <input id="v-name" class="w-full border p-2 rounded" placeholder="Enter name">
+        </div>
+
+        <div>
+          <label class="text-sm font-semibold">Mobile Number</label>
+          <input id="v-mobile" class="w-full border p-2 rounded" placeholder="Enter 10-digit number">
+        </div>
+
+        <div>
+          <label class="text-sm font-semibold">Relation / Role</label>
+          <select id="v-role" class="w-full border p-2 rounded">
+            <option value="">Select</option>
+            <option value="Son">Son</option>
+            <option value="Daughter">Daughter</option>
+            <option value="Nurse">Nurse</option>
+            <option value="Ward Staff">Ward Staff</option>
+            <option value="Friend">Friend</option>
+            <option value="Relative">Relative</option>
+            <option value="Doctor">Doctor</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm font-semibold">Date</label>
+            <input id="v-date" type="date" class="w-full border p-2 rounded">
+          </div>
+          <div>
+            <label class="text-sm font-semibold">Time</label>
+            <input id="v-time" type="time" class="w-full border p-2 rounded">
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm font-semibold">Duration (minutes)</label>
+          <input id="v-duration" class="w-full border p-2 rounded" placeholder="e.g. 15">
+        </div>
+      </div>
+
+      <button id="save-visitor" class="w-full mt-6 bg-blue-600 text-white py-2 rounded-lg font-bold">
+        Save Visitor
+      </button>
+
+    </div>
+  </div>
+
+  <script src="../js/patient-TraceNet.js"></script>
+
+
+</body>
+
+</html>

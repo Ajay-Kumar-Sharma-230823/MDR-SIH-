@@ -1,0 +1,514 @@
+/* MDR QuantumMesh - National Command Center Styles */
+:root {
+    --primary-blue: #0066ff;
+    /* Medical Blue */
+    --primary-dark: #004ec2;
+    --teal-accent: #00d2d3;
+    /* Medical Teal */
+    --teal-glow: rgba(0, 210, 211, 0.4);
+    --bg-dark: #f4f7fa;
+    --card-bg: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #10b981;
+    --neon-blue: #3b82f6;
+    --neon-glow: 0 0 10px rgba(59, 130, 246, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
+    --font-main: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    font-family: var(--font-main);
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* 1. MASTER HEADER */
+.master-header {
+    background: linear-gradient(90deg, #0066ff 0%, #004ec2 100%);
+    padding: 15px 30px;
+    box-shadow: var(--shadow-sm);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-brand img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.header-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: -0.5px;
+}
+
+.header-title span {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-controls select {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #FFFFFF !important;
+}
+
+.header-controls select option {
+    background: var(--primary-dark);
+    color: #FFFFFF;
+}
+
+.header-controls i {
+    color: #FFFFFF !important;
+}
+
+.live-sync-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.sync-dot {
+    width: 8px;
+    height: 8px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #FFFFFF;
+    animation: pulse 2s infinite;
+}
+
+/* 2. REAL-TIME STATUS BANNER */
+.status-banner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px 30px;
+}
+
+.status-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--primary-blue);
+    transition: transform 0.2s;
+}
+
+.status-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.status-card.critical {
+    border-left-color: var(--danger);
+}
+
+.status-card.warning {
+    border-left-color: var(--warning);
+}
+
+.status-card.success {
+    border-left-color: var(--success);
+}
+
+.status-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.status-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 5px 0;
+    color: var(--text-primary);
+}
+
+.status-trend {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* 3. MAIN INTERACTIVE MAP */
+.main-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr 320px;
+    gap: 20px;
+    padding: 0 30px 30px 30px;
+    height: calc(100vh - 200px);
+}
+
+.map-container {
+    background: #eef2f6;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    grid-column: 2;
+}
+
+.map-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(0, 102, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 102, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* Glowing Bubbles */
+.hospital-node {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
+    z-index: 10;
+}
+
+.hospital-node:hover {
+    transform: scale(1.2);
+    z-index: 20;
+}
+
+.node-ring {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    animation: spin 8s linear infinite;
+}
+
+.node-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.4;
+    animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* Risk Colors */
+.risk-low {
+    color: var(--success);
+    border-color: var(--success);
+}
+
+.risk-med {
+    color: var(--warning);
+    border-color: var(--warning);
+}
+
+.risk-high {
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+.risk-critical {
+    color: #7f1d1d;
+    border-color: #7f1d1d;
+}
+
+.risk-low .node-ring {
+    border-top-color: var(--success);
+}
+
+.risk-med .node-ring {
+    border-top-color: var(--warning);
+}
+
+.risk-high .node-ring {
+    border-top-color: var(--danger);
+}
+
+/* 4. LEFT PANEL - HOSPITAL LIST */
+.sidebar-panel {
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-header {
+    padding: 15px;
+    border-bottom: 1px solid #f1f5f9;
+    font-weight: 700;
+    font-size: 0.95rem;
+    background: #f8fafc;
+}
+
+.hospital-list-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f1f5f9;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.hospital-list-item:hover {
+    background: #f0f9ff;
+}
+
+.h-tag {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.tag-govt {
+    background: #e0e7ff;
+    color: #4338ca;
+}
+
+.tag-pvt {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+/* 5. HOSPITAL COMMAND CARD (MODAL) */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.command-card {
+    background: white;
+    width: 900px;
+    max-width: 95vw;
+    height: 85vh;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cc-header {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cc-tabs {
+    display: flex;
+    background: #f1f5f9;
+    padding: 5px;
+}
+
+.cc-tab {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.cc-tab.active {
+    color: var(--primary-blue);
+    border-bottom-color: var(--primary-blue);
+    background: white;
+}
+
+/* AI Recommendations */
+.ai-rec-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 15px;
+    background: #f8fafc;
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--neon-blue);
+    color: white;
+    font-size: 0.6rem;
+    padding: 4px 8px;
+    border-bottom-left-radius: 8px;
+    font-weight: 700;
+    box-shadow: var(--neon-glow);
+}
+
+/* 7. TRANSFER REQUEST PANEL */
+.transfer-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+}
+
+/* 12. LIVE ALERTS FEED */
+.alerts-panel {
+    grid-column: 3;
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+}
+
+.alert-item {
+    padding: 12px 15px;
+    border-left: 3px solid transparent;
+    background: #fff;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.85rem;
+    animation: fadeIn 0.4s ease;
+}
+
+.alert-critical {
+    border-left-color: var(--danger);
+    background: #fef2f2;
+}
+
+.alert-warning {
+    border-left-color: var(--warning);
+    background: #fffbeb;
+}
+
+.alert-info {
+    border-left-color: var(--primary-blue);
+    background: #eff6ff;
+}
+
+/* Animations */
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Utility */
+.text-neon {
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+}
+
+.bg-glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+}

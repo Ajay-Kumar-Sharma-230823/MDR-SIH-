@@ -1,0 +1,273 @@
+/* Patient Intake & Dashboard Styles - Updated to match provided images */
+:root {
+    --primary-color: #0d6efd;
+    /* Bright Blue */
+    --muted: #6c757d;
+    --danger: #dc3545;
+    --success: #198754;
+    --bg: #f4f7f6;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --radius: 12px;
+    --container-max: 1100px;
+    --text-dark: #212529;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: var(--bg);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Header Section with Background Image */
+.header-section {
+    position: relative;
+    padding: 60px 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: -40px;
+    /* Overlap with cards */
+}
+
+.header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 110, 253, 0.85);
+    /* Blue overlay */
+    z-index: 0;
+}
+
+.header-icon {
+    height: 40px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    /* Make white */
+}
+
+/* Main Content Container */
+.main-content {
+    position: relative;
+    z-index: 2;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Card / Panel */
+.medical-card {
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    padding: 30px;
+    margin-bottom: 25px;
+    border: none;
+}
+
+.card-illustration {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 80px;
+    opacity: 0.8;
+}
+
+/* Header inside card */
+.card-header-custom {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.card-header-custom i {
+    color: var(--primary-color);
+    font-size: 24px;
+}
+
+.card-header-custom h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Form labels and inputs */
+.form-label {
+    font-weight: 500;
+    color: #495057;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    background: #fff;
+    font-size: 0.95rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    border-color: var(--primary-color);
+}
+
+/* Add MDR button (toggle) */
+#toggleMdrBtn {
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-color);
+    border: 2px dashed #b6d4fe;
+    background: #f8f9fa;
+    transition: all 0.2s ease;
+}
+
+#toggleMdrBtn:hover {
+    background: #e7f1ff;
+    border-color: var(--primary-color);
+}
+
+#toggleMdrBtn[aria-expanded="true"] {
+    background: var(--primary-color);
+    color: #fff;
+    border-style: solid;
+    border-color: var(--primary-color);
+}
+
+/* MDR Panel special style */
+#mdrPanel {
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* AST table styles */
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+}
+
+.custom-table thead th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    border-bottom: 2px solid #dee2e6;
+    padding: 12px;
+}
+
+.custom-table td {
+    vertical-align: middle;
+    padding: 8px 12px;
+}
+
+/* Upload area - large drop zone */
+.upload-area {
+    border: 2px dashed #ced4da;
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.upload-area h4 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.upload-area .upload-icon {
+    font-size: 40px;
+    color: #adb5bd;
+    margin-bottom: 10px;
+}
+
+/* dragover state */
+.upload-area.dragover {
+    border-color: var(--primary-color);
+    background: #e7f1ff;
+}
+
+/* file list */
+.file-list {
+    margin-top: 15px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 15px;
+    border: 1px solid #e9ecef;
+    margin-bottom: 8px;
+}
+
+/* Buttons */
+.btn-primary-custom {
+    background: var(--primary-color);
+    border: none;
+    color: #fff;
+    padding: 15px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(13, 110, 253, 0.2);
+}
+
+.btn-primary-custom:hover {
+    background: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(13, 110, 253, 0.25);
+}
+
+/* Range output styling */
+#risk_value {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    min-width: 30px;
+    text-align: center;
+}
+
+/* Footer spacing */
+.page-space {
+    height: 60px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header-section {
+        padding: 40px 0;
+    }
+
+    .medical-card {
+        padding: 20px;
+    }
+
+    .card-illustration {
+        display: none;
+    }
+}

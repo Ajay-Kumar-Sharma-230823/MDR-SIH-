@@ -1,0 +1,272 @@
+/* Modern High-Tech Medical Dashboard Theme */
+:root {
+  --bg-dark: #0f172a;
+  --bg-card: rgba(30, 41, 59, 0.7);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --accent-blue: #3b82f6;
+  --accent-red: #ef4444;
+  --accent-glow: rgba(59, 130, 246, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Inter', sans-serif !important;
+  min-height: 100vh;
+}
+
+.app-wrapper {
+  background: transparent !important;
+}
+
+/* Header Styling */
+header {
+  background: rgba(15, 23, 42, 0.8) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border) !important;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+#console-title {
+  font-family: 'Orbitron', sans-serif !important;
+  color: var(--accent-blue) !important;
+  text-shadow: 0 0 10px var(--accent-glow);
+  font-size: 1.2rem !important;
+}
+
+#console-subtitle {
+  color: var(--text-secondary) !important;
+}
+
+/* Main Section Styling */
+#mdr-header {
+  font-family: 'Orbitron', sans-serif !important;
+  background: linear-gradient(90deg, #ef4444, #f87171);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border-bottom: none !important;
+  position: relative;
+  padding-bottom: 10px !important;
+  font-size: 1.5rem !important;
+}
+
+#mdr-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #ef4444, transparent);
+}
+
+#mdr-subheading {
+  color: var(--text-secondary) !important;
+}
+
+/* Analytics Section */
+section[aria-label="MDR case analytics charts"] {
+  background: var(--bg-card) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border-radius: 16px !important;
+}
+
+section[aria-label="MDR case analytics charts"] h3 {
+  color: var(--text-secondary) !important;
+  font-family: 'Orbitron', sans-serif !important;
+}
+
+/* Chart Bars */
+div[style*="background: #A3B5CC"] {
+  background: linear-gradient(to top, #475569, #64748b) !important;
+}
+
+div[style*="background: #1A2E4A"] {
+  background: linear-gradient(to top, #1e40af, #3b82f6) !important;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+div[style*="background: #C53030"] {
+  background: linear-gradient(to top, #991b1b, #ef4444) !important;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+  animation: pulse-bar 2s infinite;
+}
+
+@keyframes pulse-bar {
+  0% {
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.7);
+  }
+
+  100% {
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+  }
+}
+
+/* Line Chart */
+polyline {
+  stroke: var(--accent-blue) !important;
+  stroke-width: 3 !important;
+  filter: drop-shadow(0 0 5px var(--accent-blue));
+}
+
+circle[fill="#1A2E4A"] {
+  fill: var(--bg-dark) !important;
+  stroke: var(--accent-blue) !important;
+  stroke-width: 2;
+}
+
+circle[fill="#C53030"] {
+  fill: var(--accent-red) !important;
+  filter: drop-shadow(0 0 8px var(--accent-red));
+  animation: pulse-dot 1.5s infinite;
+}
+
+@keyframes pulse-dot {
+  0% {
+    r: 4;
+    opacity: 1;
+  }
+
+  50% {
+    r: 6;
+    opacity: 0.7;
+  }
+
+  100% {
+    r: 4;
+    opacity: 1;
+  }
+}
+
+/* Table Header */
+.table-header-clinical {
+  background: rgba(30, 41, 59, 0.5) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 8px !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Alert Cards (Dynamic) */
+article {
+  background: var(--bg-card) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: var(--accent-blue) !important;
+}
+
+.alert-tag {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: var(--accent-red) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+  animation: pulse-text 2s infinite;
+}
+
+@keyframes pulse-text {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.risk-tag {
+  background: linear-gradient(135deg, #991b1b, #ef4444) !important;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+}
+
+.data-label {
+  color: var(--text-secondary) !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.1em;
+}
+
+.data-value {
+  color: var(--text-primary) !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.data-value-small {
+  color: #cbd5e1 !important;
+}
+
+.divider-line {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Text Colors */
+.text-slate-900 {
+  color: var(--text-primary) !important;
+}
+
+.text-slate-700 {
+  color: #e2e8f0 !important;
+}
+
+.text-slate-600 {
+  color: var(--text-secondary) !important;
+}
+
+.text-slate-500 {
+  color: #64748b !important;
+}
+
+.text-red-700 {
+  color: #fca5a5 !important;
+  text-shadow: 0 0 5px rgba(239, 68, 68, 0.5);
+}
+
+/* Footer */
+footer {
+  background: rgba(15, 23, 42, 0.9) !important;
+  border-top: 1px solid var(--glass-border) !important;
+}
+
+#footer-text {
+  color: var(--text-secondary) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}

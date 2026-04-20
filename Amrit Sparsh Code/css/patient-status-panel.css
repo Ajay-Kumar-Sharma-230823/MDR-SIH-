@@ -1,0 +1,708 @@
+/* ⭐ PREMIUM MEDICAL DASHBOARD THEME - REDESIGN ⭐ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Colors from home.html */
+    --primary-color: #0463FA;
+    /* Bright Blue */
+    --primary-dark: #0346B0;
+    --bg-color: #EFF5FF;
+    /* Light Blue Background */
+    --surface-color: #FFFFFF;
+    --text-main: #1B2C51;
+    /* Dark Blue Text */
+    --text-muted: #64748B;
+    --border-color: #E2E8F0;
+
+    /* Status Colors */
+    --status-critical-bg: #FEF2F2;
+    --status-critical-text: #991B1B;
+    --status-high-bg: #FFF7ED;
+    --status-high-text: #9A3412;
+    --status-moderate-bg: #FEFCE8;
+    --status-moderate-text: #854D0E;
+    --status-low-bg: #F0FDF4;
+    --status-low-text: #166534;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-search: 0 8px 20px rgba(4, 99, 250, 0.15);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    background-image: url('../img/bg-medical.png');
+    /* Keep subtle texture if available */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--text-main);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+}
+
+/* ---------------------------------------------------------
+   MODERN NAVBAR STYLES (Clean White Theme)
+----------------------------------------------------------*/
+.navbar {
+    background: white;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #F1F5F9;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.nav-logo {
+    height: 40px;
+    width: auto;
+}
+
+.nav-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: -0.5px;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #64748B;
+    /* Dark Grey for inactive */
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-link:hover {
+    color: #006CFF;
+    /* Bright Blue Hover */
+}
+
+.nav-link.active {
+    color: #006CFF;
+    /* Bright Blue Active */
+    font-weight: 700;
+}
+
+.nav-link i {
+    font-size: 12px;
+    margin-top: -2px;
+}
+
+/* Dropdown */
+.nav-item {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    min-width: 220px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+    border: 1px solid #E2E8F0;
+}
+
+.nav-item:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(15px);
+}
+
+.dropdown-item {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+    background: #F8FAFC;
+    color: #006CFF;
+}
+
+/* Modern Notification Bell */
+.notification-container {
+    margin-left: 16px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left: 16px;
+    border-left: 1px solid #E2E8F0;
+    /* Separator line */
+}
+
+.notification-bell {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+    border-radius: 50%;
+}
+
+.notification-bell i {
+    font-size: 20px;
+    /* Thin icon size */
+    color: #006CFF;
+    /* Bright Hospital Blue */
+    transition: transform 0.2s;
+}
+
+.notification-bell:hover {
+    background: #EFF6FF;
+    /* Light blue hover bg */
+}
+
+.notification-bell:hover i {
+    transform: scale(1.1);
+}
+
+/* Small Alert Dot */
+.notification-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    background-color: #EF4444;
+    /* Red Alert Dot */
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+/* Glassmorphism Container */
+.panel-container {
+    max-width: 1400px;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    overflow: hidden;
+}
+
+/* Header Section */
+.panel-header {
+    background: var(--primary-color);
+    padding: 32px 40px 40px;
+    /* More padding at bottom for search */
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative background circle */
+.panel-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.title-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 1;
+}
+
+.header-logo {
+    height: 56px;
+    width: auto;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title-section h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.title-section p {
+    margin: 4px 0 0 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+/* Header Actions (Meta + Filter) */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 1;
+}
+
+.header-meta {
+    text-align: right;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+}
+
+.header-meta strong {
+    color: white;
+    font-weight: 600;
+}
+
+/* Prominent Search Section */
+.header-search-section {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    z-index: 1;
+    position: relative;
+}
+
+.search-container {
+    position: relative;
+    width: 600px;
+    max-width: 100%;
+}
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: white;
+    border-radius: 50px;
+    /* Pill shape */
+    box-shadow: var(--shadow-search);
+    padding: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-wrapper:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(4, 99, 250, 0.25);
+}
+
+.search-input {
+    width: 100%;
+    padding: 14px 20px 14px 50px;
+    /* Left padding for icon */
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+    color: var(--text-main);
+    background: transparent;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #94A3B8;
+}
+
+/* Search Icon */
+.search-wrapper::before {
+    content: '\f002';
+    /* FontAwesome Search */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    font-size: 18px;
+    pointer-events: none;
+}
+
+.search-clear {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94A3B8;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    display: none;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 50%;
+    background: #F1F5F9;
+    transition: all 0.2s;
+}
+
+.search-clear:hover {
+    background: #E2E8F0;
+    color: #64748B;
+}
+
+.search-input:not(:placeholder-shown)+.search-clear {
+    display: block;
+}
+
+/* Filter Toggle */
+.filter-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+}
+
+.filter-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+}
+
+.toggle-switch {
+    width: 44px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.toggle-switch.active {
+    background: #10B981;
+    /* Green for active */
+}
+
+.toggle-slider {
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch.active .toggle-slider {
+    transform: translateX(20px);
+}
+
+.filter-status {
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    min-width: 28px;
+}
+
+/* Table Styling */
+.status-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.status-table thead th {
+    background: #F8FAFC;
+    padding: 18px 24px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.status-table tbody tr {
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.status-table tbody tr:hover {
+    background: #F8FAFC;
+    transform: scale(1.002);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+    position: relative;
+}
+
+.status-table td {
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+/* Cell Specifics */
+.room-bed {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--primary-color);
+}
+
+.patient-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-main);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.patient-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.doctor-info {
+    font-weight: 500;
+    color: var(--primary-color);
+    background: #EFF6FF;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    display: inline-block;
+    border: 1px solid #DBEAFE;
+}
+
+/* Badges */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.status-critical {
+    background: var(--status-critical-bg);
+    color: var(--status-critical-text);
+    border: 1px solid #FECACA;
+}
+
+.status-high {
+    background: var(--status-high-bg);
+    color: var(--status-high-text);
+    border: 1px solid #FFEDD5;
+}
+
+.status-moderate {
+    background: var(--status-moderate-bg);
+    color: var(--status-moderate-text);
+    border: 1px solid #FEF3C7;
+}
+
+.status-low {
+    background: var(--status-low-bg);
+    color: var(--status-low-text);
+    border: 1px solid #DCFCE7;
+}
+
+.status-clear {
+    background: #F3F4F6;
+    color: #4B5563;
+    border: 1px solid #E5E7EB;
+}
+
+/* Risk Score Bar */
+.risk-score-container {
+    width: 120px;
+}
+
+.risk-score-bar {
+    height: 8px;
+    background: #E2E8F0;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    overflow: hidden;
+}
+
+.risk-score-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.risk-score-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.risk-score-fill.critical {
+    background: #DC2626;
+}
+
+.risk-score-fill.high {
+    background: #EA580C;
+}
+
+.risk-score-fill.moderate {
+    background: #D97706;
+}
+
+.risk-score-fill.low {
+    background: #16A34A;
+}
+
+.risk-score-fill.clear {
+    background: #16A34A;
+}
+
+/* Delete Button */
+.btn-delete {
+    background: white;
+    border: 1px solid #FECACA;
+    color: #DC2626;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-delete:hover {
+    background: #FEF2F2;
+    border-color: #DC2626;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.15);
+}
+
+.btn-delete:active {
+    transform: translateY(0);
+}
+
+/* Search Dropdown */
+.search-dropdown {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    margin-top: 12px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    z-index: 100;
+}
+
+.search-result-item {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background 0.1s;
+    font-size: 14px;
+    color: var(--text-main);
+}
+
+.search-result-item:hover {
+    background: #F8FAFC;
+    color: var(--primary-color);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+}
